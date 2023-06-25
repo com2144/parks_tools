@@ -62,6 +62,40 @@ class PipelineSetupView(QWidget):
     def cancel_clicked(self):
         print('work cancel')
         self.close()
+    
+    @staticmethod
+    def message_box(message):
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Warning)
+        msg_box.setWindowTitle("Warning")
+        msg_box.setText(f"{message}")
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec_()
+    
+    # @staticmethod
+    # def project_confirm_box(message):
+    #     msg_box = QMessageBox()
+    #     msg_box.setIcon(QMessageBox.Warning)
+    #     msg_box.setWindowTitle("Warning")
+    #     msg_box.setText(f"{message}")
+    #     msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    #     # msg_box.setDefaultButton(QMessageBox.Ok)
+
+    #     result = msg_box.exec_()
+
+    #     if result == QMessageBox.Ok:
+    #         print("OK 버튼이 눌렸습니다.")
+    #     elif result == QMessageBox.Cancel:
+    #         print("Cancel 버튼이 눌렸습니다.")
+
+class BrowseDialog(QFileDialog):
+    def __init__(self):
+        super().__init__()
+        ow = self.Options()
+        ow |= self.DontUseNativeDialog
+        ow |= self.ShowDirsOnly
+        ow = self.getExistingDirectory(None, "Select Directory", "", options=ow)
+        self.option = ow
 
 
 if __name__ == '__main__':
