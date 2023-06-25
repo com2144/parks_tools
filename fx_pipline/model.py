@@ -1,7 +1,7 @@
 import hou
 import os
 
-class PipelineSetup:
+class PipelineSetupModel:
     def __init__(self):
         self._home_path = ''
         self.project_name = ''
@@ -87,7 +87,7 @@ class PipelineSetup:
             hou.hipFile.save(file_name, save_to_recent_files=False)
     
 def main():
-    test = PipelineSetup()
+    test = PipelineSetupModel()
     test.home_path = 'C:/Users/com2144/Desktop/test'
     test.project_set('pt')
     test.ext_set('hiplc')
