@@ -69,6 +69,9 @@ class ImageConverting:
             
         elif end_frame != render_dir_count or not os.path.exists(self.render_path):
             self.node.parm('execute').pressButton()
+            ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {start_frame} -i {self.image_file_path} -frames:v {end_frame} {self.mp4_file_path}'
+            subprocess.run(ffmpeg_cmd, shell=True)
+            self.warning_message('Converting is Done')
             
         elif os.path.exists(self.mp4_file_path):
             self.warning_message('mp4 already exists!')
