@@ -27,6 +27,12 @@ class PipelineSetupView(QWidget):
         self.project_line_edit.setPlaceholderText("Enter the Project name")
         project_line_layout.addWidget(self.project_line_edit)
 
+        self.ext_combo_box = QComboBox()
+        ext_list = ['hip', 'hiplc', 'hipnc']
+        for ext in ext_list:
+            self.ext_combo_box.addItem(ext)
+        project_line_layout.addWidget(self.ext_combo_box)
+
         layout.addLayout(project_line_layout)
 
         button_layout = QHBoxLayout()
@@ -45,8 +51,8 @@ class PipelineSetupView(QWidget):
 
     def center_on_screen(self):
         screen_geometry = QGuiApplication.primaryScreen().geometry()
-        x = (screen_geometry.width() - self.width()) // 1.6
-        y = (screen_geometry.height() - self.height()) // 1.3
+        x = (screen_geometry.width() - self.width()) // 2
+        y = (screen_geometry.height() - self.height()) // 2
 
         self.move(x, y)
 
@@ -57,11 +63,11 @@ class PipelineSetupView(QWidget):
 
     @staticmethod
     def ok_clicked():
-        print('convert start')
+        print('project set')
 
+    @staticmethod
     def cancel_clicked(self):
         print('work cancel')
-        self.close()
     
     @staticmethod
     def message_box(message):
@@ -71,22 +77,6 @@ class PipelineSetupView(QWidget):
         msg_box.setText(f"{message}")
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
-    
-    # @staticmethod
-    # def project_confirm_box(message):
-    #     msg_box = QMessageBox()
-    #     msg_box.setIcon(QMessageBox.Warning)
-    #     msg_box.setWindowTitle("Warning")
-    #     msg_box.setText(f"{message}")
-    #     msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-    #     # msg_box.setDefaultButton(QMessageBox.Ok)
-
-    #     result = msg_box.exec_()
-
-    #     if result == QMessageBox.Ok:
-    #         print("OK 버튼이 눌렸습니다.")
-    #     elif result == QMessageBox.Cancel:
-    #         print("Cancel 버튼이 눌렸습니다.")
 
 class BrowseDialog(QFileDialog):
     def __init__(self):

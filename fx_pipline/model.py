@@ -1,5 +1,6 @@
 import hou
 import os
+import json
 
 class PipelineSetupModel:
     def __init__(self):
@@ -10,6 +11,14 @@ class PipelineSetupModel:
 
         self.fx_shots_path = ''
 
+        self.dir_path = ''
+        self.user_path = ''
+
+        self.user_dict = None
+
+        self.home_json_path()
+        self.access_setting()
+
     @property
     def home_path(self):
         return self._home_path
@@ -18,9 +27,6 @@ class PipelineSetupModel:
     def home_path(self, value):
         self._home_path = value
     
-    #controller에서 home_path값 json값 받을지를 시작과 동시에 물어보도록 팝업창 띄우기
-
-
     def project_set(self, proj_name):
         self.project_name = proj_name
         self.project_path = f'{self.home_path}/{proj_name}'
@@ -86,6 +92,40 @@ class PipelineSetupModel:
         if not os.path.exists(file_name):
             hou.hipFile.save(file_name, save_to_recent_files=False)
     
+    def home_json_path(self):
+        now_path = os.path.realpath(__file__)
+        split_path = now_path.split('\\')[:-1]
+        self.dir_path = f"{'/'.join(split_path)}/.config"
+        self.user_path = f"{self.dir_path}/user.json"
+    
+    def access_setting(self):
+        if not os.path.exists(self.dir_path):
+            try:
+                os.makedirs(self.dir_path)
+            except OSError:
+                raise ValueError("Failed to create the directory.")
+        try:
+            if not os.path.exists(self.user_path):
+                self.reset_setting()
+        except OSError:
+            raise ValueError("Failed to create user.json file.")
+        return True
+    
+    def save_setting(self):
+        self.user_dict = {
+            'home': self.home_path
+        }
+        with open(self.user_path, 'w') as json_file:
+            json.dump(self.user_dict, json_file)
+    
+    def load_setting(self):
+        with open(self.user_path, 'r') as json_file:
+            self.user_dict = json.load(json_file)
+    
+    def reset_setting(self):
+        self.home_path = ''
+        self.save_setting()
+
 def main():
     test = PipelineSetupModel()
     test.home_path = 'C:/Users/com2144/Desktop/test'
