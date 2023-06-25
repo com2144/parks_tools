@@ -34,15 +34,18 @@ class PipelineSetupController:
             self.model.project_set(self.view.project_line_edit.text())
             self.model.ext_set(self.view.ext_combo_box.currentText())
 
-            if os.path.exists(f'{self.model.home_path}/{self.model.project_name}'):
-                self.view.message_box('Project already exists')
-                self.clean_up()
-            else:
+            asset_path = f'{self.model.home_path}/{self.model.project_name}/asset'
+            shot_path = f'{self.model.home_path}/{self.model.project_name}/shot'
+
+            if not (os.path.exists(asset_path) or os.path.exists(shot_path)):
                 self.model.assets_path_init_set()
                 self.model.shots_path_init_set()
                 self.model.review_path_init_set()
                 self.model.houdini_path_init_set()
                 self.view.message_box('Project initial setting Done')
+                self.clean_up()
+            else:
+                self.view.message_box('Project already exists')
                 self.clean_up()
    
     def clean_up(self):
