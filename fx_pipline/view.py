@@ -1,5 +1,6 @@
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
+import os
 
 class PipelineSetupView(QWidget):
     def __init__(self):
@@ -81,6 +82,7 @@ class PipelineSetupView(QWidget):
 class BrowseDialog(QFileDialog):
     def __init__(self):
         super().__init__()
+        self.setDirectory(os.path.expanduser('~'))
         ow = self.Options()
         ow |= self.DontUseNativeDialog
         ow |= self.ShowDirsOnly

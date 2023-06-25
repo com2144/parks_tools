@@ -47,6 +47,7 @@ class PipelineSetupController:
    
     def clean_up(self):
         self.view.browse_line_edit.setText('')
+        self.view.project_line_edit.setText('')
         self.model.home_path = ''
         self.model.project_name = ''
     
