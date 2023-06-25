@@ -48,7 +48,7 @@ class PipelineSetupModel:
     def shots_path_init_set(self):
         self.fx_shots_path = f'{self.project_path}/shot/fx'
         fx_shot_list = ['work', 'ref']
-        work_list = ['houdini', 'nuke', 'maya', 'review']
+        work_list = ['houdini', 'nuke', 'maya', 'cam','review']
 
         ref_list = ['artwork', 'footage']
 
