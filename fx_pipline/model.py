@@ -128,14 +128,13 @@ class PipelineSetupModel:
 
 def main():
     test = PipelineSetupModel()
-    print(os.path.expanduser('~'))
-    # test.home_path = 'C:/Users/com2144/Desktop/test'
-    # test.project_set('pt')
-    # test.ext_set('hiplc')
-    # test.assets_path_init_set()
-    # test.shots_path_init_set()
-    # test.review_path_init_set()
-    # test.houdini_path_init_set()
+    test.home_path = 'C:/Users/com2144/Desktop/test'
+    test.project_set('pt')
+    test.ext_set('hiplc')
+    test.assets_path_init_set()
+    test.shots_path_init_set()
+    test.review_path_init_set()
+    test.houdini_path_init_set()
 
 if __name__ == '__main__':
     main()
