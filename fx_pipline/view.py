@@ -90,8 +90,8 @@ class BrowseDialog(QFileDialog):
         self.option = ow
 
 
-if __name__ == '__main__':
-    app = QApplication()
-    window = PipelineSetupView()
-    window.show()
-    app.exec_()
+# if __name__ == '__main__':
+#     app = QApplication()
+#     window = PipelineSetupView()
+#     window.show()
+#     app.exec_()
