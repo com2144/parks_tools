@@ -126,15 +126,15 @@ class PipelineSetupModel:
         self.home_path = ''
         self.save_setting()
 
-def main():
-    test = PipelineSetupModel()
-    test.home_path = 'C:/Users/com2144/Desktop/test'
-    test.project_set('pt')
-    test.ext_set('hiplc')
-    test.assets_path_init_set()
-    test.shots_path_init_set()
-    test.review_path_init_set()
-    test.houdini_path_init_set()
+# def main():
+#     test = PipelineSetupModel()
+#     test.home_path = 'C:/Users/com2144/Desktop/test'
+#     test.project_set('pt')
+#     test.ext_set('hiplc')
+#     test.assets_path_init_set()
+#     test.shots_path_init_set()
+#     test.review_path_init_set()
+#     test.houdini_path_init_set()
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
