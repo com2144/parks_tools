@@ -30,6 +30,7 @@ class PipelineSetupController:
         elif not (self.model.home_path and self.view.project_line_edit):
             self.view.message_box('Choose the home path and write Project name')
             self.clean_up()
+            return
         else:
             self.model.project_set(self.view.project_line_edit.text())
             self.model.ext_set(self.view.ext_combo_box.currentText())
