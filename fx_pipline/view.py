@@ -67,7 +67,7 @@ class PipelineSetupView(QWidget):
         print('project set')
 
     @staticmethod
-    def cancel_clicked(self):
+    def cancel_clicked():
         print('work cancel')
     
     @staticmethod
