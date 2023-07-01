@@ -1,1 +1,1 @@
-do shell script "hython ./controller.py" without terminal
+do shell script "hython ./python_file/controller.py" without terminal

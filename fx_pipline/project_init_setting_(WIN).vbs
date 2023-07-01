@@ -1,2 +1,2 @@
 Set objShell = CreateObject("WScript.Shell")
-objShell.Run "cmd /c hython .\controller.py", 0
+objShell.Run "cmd /c hython .\python_file\controller.py", 0
