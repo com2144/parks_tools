@@ -1,0 +1,1 @@
+do shell script "hython ./controller.py" without terminal
