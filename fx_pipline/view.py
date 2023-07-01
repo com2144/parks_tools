@@ -67,7 +67,7 @@ class PipelineSetupView(QWidget):
         print('project set')
 
     @staticmethod
-    def cancel_clicked(self):
+    def cancel_clicked():
         print('work cancel')
     
     @staticmethod
@@ -90,8 +90,8 @@ class BrowseDialog(QFileDialog):
         self.option = ow
 
 
-if __name__ == '__main__':
-    app = QApplication()
-    window = PipelineSetupView()
-    window.show()
-    app.exec_()
+# if __name__ == '__main__':
+#     app = QApplication()
+#     window = PipelineSetupView()
+#     window.show()
+#     app.exec_()
