@@ -4,10 +4,13 @@
 
 ## fx_pipline
 ![캡처](https://github.com/com2144/parks_houdini_tools/assets/125478486/7a0fceee-d079-4db0-808d-bf5138e50df6)
+- 사용법
+  https://vimeo.com/841853026
 - fx를 작업 할 때 필요한 트리구조를 만들어줍니다.
 - asset
 - shot -> fx, plate
 ### ex) asset name: test-project_char_boy_txt.png  
+
 
 
 # houdini shelf tab add script
