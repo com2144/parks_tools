@@ -7,7 +7,7 @@
 - fx를 작업 할 때 필요한 트리구조를 만들어줍니다.
 - asset
 - shot -> fx, plate
-### ex) asset name: test-project_char_boy_txt.png
+### ex) asset name: test-project_char_boy_txt.png  
 
 
 # houdini shelf tab add script
