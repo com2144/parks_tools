@@ -16,7 +16,7 @@
 ### jpg -> mp4 / exr -> mp4
 - fx작업을 하면서 생기는 애니메이션을 확인하고 싶을 때 사용합니다.
 
-- ffmpeg 환경변수 설정 방법
+- ffmpeg 환경변수 설정 방법  
 https://www.youtube.com/watch?v=PLbijyGIAEo
 
 ## multi_renamer
