@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=PLbijyGIAEo
 
 ## multi_renamer
 - 많은 양의 데이터 이름을 한 번에 바꿀 때 사용합니다.
-- 웹에서 받아온 asset의 이름을 규칙에 맞게 tree 규칙에 맞게 고칠 때 유용합니다.
+- 웹에서 받아온 asset의 이름을 pipline 규칙에 맞게 고칠 때 유용합니다.
 
 ## publish_working_file
 - houdini를 사용하면서 보통은 ctrl + s를 사용하다가 완전 새로운 버전으로 작업을 하고 싶을 때 사용하면 좋습니다.
