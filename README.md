@@ -7,9 +7,12 @@
 - 사용법  
   https://vimeo.com/841853026
 - fx를 작업 할 때 필요한 트리구조를 만들어줍니다.
-- asset
+### ex) asset name: test-project_char_boy_txt.png
+- asset : chareter, enviroment, property, vehicle
 - shot -> fx, plate
-### ex) asset name: test-project_char_boy_txt.png  
+- houdini, maya, nuke에는 각 프로젝트 파일을 저장하면 됩니다.
+- review에는 랜더 후 결과물을 넣으면 됩니다.
+- plate에는 배경 이미지 파일을 저장하면됩니다. (org는 exr원본을 말하며, jpg는 org이미지를 컨버팅한 이미지, mp4는 jpg를 컨버팅한 영상입니다.)
 
 
 
@@ -28,3 +31,7 @@ https://www.youtube.com/watch?v=PLbijyGIAEo
 
 ## publish_working_file
 - houdini를 사용하면서 보통은 ctrl + s를 사용하다가 완전 새로운 버전으로 작업을 하고 싶을 때 사용하면 좋습니다.
+
+## multi_cache_hda
+- 한 번에 캐시를 할 수 있도록 돕는 hda입니다.  
+
