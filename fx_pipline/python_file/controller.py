@@ -11,10 +11,14 @@ class PipelineSetupController:
         self.view.cancel_button.clicked.connect(self.cancel_clicked)
 
     def browse_clicked(self):
-        dialog = BrowseDialog()
-        self.model.home_path = dialog.option
-        self.view.browse_line_edit.setText(self.model.home_path)
-        self.model.save_setting()
+        if controller.model.user_dict.get('home'):
+            controller.root_confirm_box(controller.model.user_dict.get('home'))
+            return
+        else: 
+            dialog = BrowseDialog()
+            self.model.home_path = dialog.option
+            self.view.browse_line_edit.setText(self.model.home_path)
+            self.model.save_setting()
     
     def ok_clicked(self):
         if not self.view.browse_line_edit.text():
