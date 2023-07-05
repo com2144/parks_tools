@@ -34,15 +34,21 @@ class Publish_file:
         self.file_name = '_'.join(split_ver)
     
     def make_publish_path(self):
-        work_path_len = os.listdir(self.work_path)
-        del work_path_len[0]
-        version_num = len(work_path_len)
+        files = []
+        work_dir = os.listdir(self.work_path)
+        
+        for item in work_dir:
+            item_path = f'{self.work_path}/{item}'
+            if os.path.isfile(item_path):
+                files.append(item)
+        
+        current_version_num = len(files)
         
         if not os.path.exists(self.publish_path):
             os.makedirs(self.publish_path)
         
-        next_publish_file_path = f'{self.publish_path}/{self.file_name}_v{version_num:03d}.{self.ext}'
-        next_work_file_path = f'{self.work_path}/{self.file_name}_v{(version_num+1):03d}.{self.ext}'
+        next_publish_file_path = f'{self.publish_path}/{self.file_name}_v{current_version_num:03d}.{self.ext}'
+        next_work_file_path = f'{self.work_path}/{self.file_name}_v{(current_version_num+1):03d}.{self.ext}'
         
         if not os.path.exists(next_publish_file_path):
             hou.hipFile.save(next_work_file_path, save_to_recent_files=True)
