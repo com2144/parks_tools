@@ -37,9 +37,8 @@ https://www.youtube.com/watch?v=PLbijyGIAEo
 ## reserv_cache hda
 - 한 번에 캐시를 할 수 있도록 돕는 hda입니다.   
   
-- 최초 제작: 문건용
-- email: scmstarcraft@naver.com
-- 수정 베포: 박선준
+- 최초 제작: 문건용 | email: scmstarcraft@naver.com
+- 수정 베포: 박선준 | email: com2144@gmail.com
 
 - 사용법   
 https://sunjune-study-diary.notion.site/multi-cache-hda-19042fb6907849799039fa678eebbef7
