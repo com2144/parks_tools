@@ -6,8 +6,6 @@ class PipelineSetupController:
         self.model = PipelineSetupModel()
         self.view = PipelineSetupView()
 
-
-
         self.view.browse_button.clicked.connect(self.browse_clicked)
         self.view.ok_button.clicked.connect(self.ok_clicked)
         self.view.cancel_button.clicked.connect(self.cancel_clicked)
@@ -62,20 +60,19 @@ class PipelineSetupController:
         msg_box = QMessageBox()
         msg_box.setIcon(QMessageBox.Warning)
         msg_box.setWindowTitle("Warning")
-        msg_box.setText(f"{root_path} is already exists. Do you want to choose a new root path?")
+        msg_box.setText(f"{root_path} is already exists. Do you want to use it?")
         msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
 
         result = msg_box.exec_()
 
         if result == QMessageBox.Ok:
-            self.clean_up()
-            self.model.reset_setting()
-        elif result == QMessageBox.Cancel:
             self.view.browse_line_edit.setText(root_path)
             self.model.home_path = root_path
+        elif result == QMessageBox.Cancel:
+            self.clean_up()
+            self.model.reset_setting()
+
     
-
-
 if __name__ == '__main__':
     app = QApplication()
     controller = PipelineSetupController()
