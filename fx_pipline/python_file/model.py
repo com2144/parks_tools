@@ -91,6 +91,10 @@ class PipelineSetupModel:
         file_name = f'{work_path}/{self.project_name}_shot_fx_work_v001.{self.ext}'
         if not os.path.exists(file_name):
             hou.hipFile.save(file_name, save_to_recent_files=False)
+            hip_file = hou.hipFile.load(file_name)
+            playbar = hou.playbar
+            playbar.setFrameRange(1001, 1240)
+            hou.hipFile.save(hip_file, save_to_recent_files=False)
     
     def home_json_path(self):
         now_path = os.path.realpath(__file__)
