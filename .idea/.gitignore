@@ -1,7 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/__pycache__
+/parks_houdini_tools/fx_pipline/python_file/.config/
+/parks_houdini_tools/fx_pipline/python_file/__pycache__/
 *.pyc
-.config/
 *.json

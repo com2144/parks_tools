@@ -33,8 +33,14 @@ class PipelineSetupController:
             self.view.message_box('Choose the home path and write Project name')
             self.clean_up()
             return
+        elif ' ' in self.view.project_line_edit.text():
+            self.view.message_box('Project name should not have a space!')
+            return
+        elif '_' in self.view.project_line_edit.text():
+            self.view.message_box('Project name should not have "_"!')
         else:
-            self.model.project_set(self.view.project_line_edit.text())
+            upper_project_name = self.view.project_line_edit.text().upper()
+            self.model.project_set(upper_project_name)
             self.model.ext_set(self.view.ext_combo_box.currentText())
 
             asset_path = f'{self.model.home_path}/{self.model.project_name}/asset'
