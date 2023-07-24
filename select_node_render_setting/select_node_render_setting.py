@@ -21,6 +21,7 @@ def select_count_node():
     
     if int_count > geo_point:
         warning_window('현재 노드의 포인트 수보다 큽니다. 적은 수를 입력하세요.')
+        return
     
     split_path = node_path.split('/')
     del split_path[-1]
