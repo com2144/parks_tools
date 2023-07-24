@@ -30,6 +30,7 @@ def select_count_node():
     for count in range(0, int_count):
         blast_node = hou.node(rejoin_path).createNode('blast',f'blast_{count}')
         blast_node.parm('group').set(str(count))
+        blast_node.parm('negate').set(1)
         blast_node.setFirstInput(parent_node)
         blast_node.moveToGoodPosition()
         
