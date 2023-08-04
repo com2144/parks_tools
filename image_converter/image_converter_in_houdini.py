@@ -22,8 +22,8 @@ class ImageConverting:
             
         if 'out' in confirm_out:
             self.node = hou.node(select_node)
-            self.make_path()
-            self.convert_action()
+            self.make_paths()
+            # self.convert_action()
             
         elif 'out' not in confirm_out:
             self.warning_message('Select Out network plz')
@@ -47,6 +47,7 @@ class ImageConverting:
         file_name_split = self.file_name.split('.')
         self.ext = file_name_split[-1]
         
+        
         for i in range(0,2):
             del file_name_split[-1]        
         
@@ -60,7 +61,6 @@ class ImageConverting:
         self.mp4_file_path = f'{mp4_path}/{self.file_name}.mp4'
         self.render_path = f'{root_path}/{jpg_dir_name}/{render_dir_name}'
         self.image_file_path = f'{self.render_path}/{self.file_name}.%04d.{self.ext}'
-        
         
    
     def convert_action(self):
