@@ -15,45 +15,47 @@ class ImageConverting:
     
     def select_renderer(self):
         select_node = hou.ui.selectNode()
+        
+        if select_node is None:
+            self.warning_message('Select Node plz!')
+            return
+        
         confirm_out = select_node.split('/')
             
-        if select_node is not None and 'out' in confirm_out:
+        if 'out' in confirm_out:
             self.node = hou.node(select_node)
         elif 'out' not in confirm_out:
-            self.warning_message('Select Out network plz') 
-        else:
-            self.warning_message('Select Node plz!')
+            self.warning_message('Select Out network plz')
+            return
     
     def make_paths(self):
         image_path = self.node.parm('vm_picture').evalAsString()
         root_path = image_path.split('/')
         
-        file_name = root_path[-1]
-        element_dir_name = root_path[-2]
+        self.file_name = root_path[-1]
+        render_dir_name = root_path[-2]
         jpg_dir_name = root_path[-3]
-        
         
         for i in range(0,3):
             del root_path[-1]
 
         root_path = '/'.join(root_path)
         
-        file_name_split = file_name.split('.')
+        file_name_split = self.file_name.split('.')
         self.ext = file_name_split[-1]
         
         for i in range(0,2):
             del file_name_split[-1]        
         
-        file_name = ''.join(file_name_split)
+        self.file_name = '.'.join(file_name_split)     
 
-        mp4_path = f'{root_path}/mp4/{element_dir_name}'
+        mp4_path = f'{root_path}/mp4/{self.file_name}'
         
         if not os.path.exists(mp4_path):
             os.makedirs(mp4_path)
                 
-        self.mp4_file_path = f'{mp4_path}/{file_name}.mp4'
-        print(self.mp4_file_path)
-        self.render_path = f'{root_path}/{jpg_dir_name}/{element_dir_name}'
+        self.mp4_file_path = f'{mp4_path}/{self.file_name}.mp4'
+        self.render_path = f'{root_path}/{jpg_dir_name}/{render_dir_name}'
         self.image_file_path = f'{self.render_path}/{self.file_name}.%04d.{self.ext}'
         
         
@@ -69,12 +71,9 @@ class ImageConverting:
             
         elif end_frame != render_dir_count or not os.path.exists(self.render_path):
             self.node.parm('execute').pressButton()
-            if end_frame == len(os.listdir(self.render_path)):
-                ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {start_frame} -i {self.image_file_path} -frames:v {end_frame} {self.mp4_file_path}'
-                subprocess.run(ffmpeg_cmd, shell=True)
-                self.warning_message('Converting is Done')
-            else:
-                self.warning_message('rendering not Complete')
+            ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {start_frame} -i {self.image_file_path} -frames:v {end_frame} {self.mp4_file_path}'
+            subprocess.run(ffmpeg_cmd, shell=True)
+            self.warning_message('Converting is Done')
             
         elif os.path.exists(self.mp4_file_path):
             self.warning_message('mp4 already exists!')
