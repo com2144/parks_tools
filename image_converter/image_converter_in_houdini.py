@@ -23,7 +23,7 @@ class ImageConverting:
         if 'out' in confirm_out:
             self.node = hou.node(select_node)
             self.make_paths()
-            # self.convert_action()
+            self.convert_action()
             
         elif 'out' not in confirm_out:
             self.warning_message('Select Out network plz')
@@ -73,6 +73,7 @@ class ImageConverting:
             self.warning_message('Wrong extension setup!')
             
         elif end_frame != render_dir_count or not os.path.exists(self.render_path):
+            self.node.parm('trange').set(1)
             self.node.parm('execute').pressButton()
             ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {start_frame} -i {self.image_file_path} -frames:v {end_frame} {self.mp4_file_path}'
             subprocess.run(ffmpeg_cmd, shell=True)
