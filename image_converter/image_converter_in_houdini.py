@@ -67,12 +67,16 @@ class ImageConverting:
         start_frame = int(self.node.parm('f1').evalAsString())
         end_frame = int(self.node.parm('f2').evalAsString())
         
+        if not os.path.exists(self.render_path):
+            os.makedirs(self.render_path)
+        
         render_dir_count = len(os.listdir(self.render_path))
         
         if self.ext not in ['jpg', 'exr']:
             self.warning_message('Wrong extension setup!')
+            return
             
-        elif end_frame != render_dir_count or not os.path.exists(self.render_path):
+        if end_frame != render_dir_count:
             self.node.parm('trange').set(1)
             self.node.parm('execute').pressButton()
             ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {start_frame} -i {self.image_file_path} -frames:v {end_frame} {self.mp4_file_path}'
