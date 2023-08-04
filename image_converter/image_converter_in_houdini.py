@@ -10,10 +10,8 @@ class ImageConverting:
         self.render_path = '' 
         self.image_file_path = ''
         
-        self.select_renderer()
-        
     
-    def select_renderer(self):
+    def render_action(self):
         select_node = hou.ui.selectNode()
         
         if select_node is None:
@@ -24,10 +22,15 @@ class ImageConverting:
             
         if 'out' in confirm_out:
             self.node = hou.node(select_node)
+            self.make_path()
+            self.convert_action()
+            
         elif 'out' not in confirm_out:
             self.warning_message('Select Out network plz')
             return
-    
+
+            
+            
     def make_paths(self):
         image_path = self.node.parm('vm_picture').evalAsString()
         root_path = image_path.split('/')
@@ -90,7 +93,6 @@ class ImageConverting:
         
 def main():
     test = ImageConverting()
-    test.make_paths()
-    test.convert_action()
+    test.render_action()
     
 main()
