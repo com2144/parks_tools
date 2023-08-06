@@ -38,7 +38,7 @@ class PipelineSetupModel:
     
     def assets_path_init_set(self):
         assets_path = f'{self.project_path}/asset'
-        asset_list = ['char', 'env', 'prop', 'veh']
+        asset_list = ['char', 'env', 'prop', 'veh', 'txt']
 
         for asset in asset_list:
             list_path = f'{assets_path}/{asset}'
