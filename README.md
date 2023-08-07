@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=PLbijyGIAEo
 
 # houdini hda
 
-## reserv_cache hda
+## multi_cache_hda(reserv_cache hda)
 - 한 번에 캐시를 할 수 있도록 돕는 hda입니다.   
   
 - 최초 제작: 문건용 | email: scmstarcraft@naver.com
