@@ -80,16 +80,15 @@ class ImageConverting:
             self.warning_message('Wrong extension setup!')
             return
             
+        if os.path.exists(self.mp4_file_path):
+            os.remove(self.mp4_file_path)
+            
         if end_to_start != render_dir_count:
             self.node.parm('trange').set(1)
             self.node.parm('execute').pressButton()
             ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {self.start_frame} -i {self.image_file_path} -frames:v {self.end_frame} {self.mp4_file_path}'
             subprocess.run(ffmpeg_cmd, shell=True)
-            self.warning_message('Converting is Done')
-            
-        elif os.path.exists(self.mp4_file_path):
-            self.yes_or_no_window()
-            
+            self.warning_message('Converting is Done')           
         else:
             ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {self.start_frame} -i {self.image_file_path} -frames:v {self.end_frame} {self.mp4_file_path}'
             subprocess.run(ffmpeg_cmd, shell=True)
@@ -99,15 +98,15 @@ class ImageConverting:
     def warning_message(message):
         hou.ui.displayMessage(message, title='Warning', severity=hou.severityType.Message)
 
-    def yes_or_no_window(self):
-        signal = hou.ui.displayMessage("mp4 already exists. Do you want to convert?", buttons=('Yes', 'No'))
-        if signal == 0:
-            os.remove(self.mp4_file_path)
-            ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {self.start_frame} -i {self.image_file_path} -frames:v {self.end_frame} {self.mp4_file_path}'
-            subprocess.run(ffmpeg_cmd, shell=True)
-            self.warning_message('Converting is Done')
-        else: 
-            pass
+    # def yes_or_no_window(self):
+    #     signal = hou.ui.displayMessage("mp4 already exists. Do you want to convert?", buttons=('Yes', 'No'))
+    #     if signal == 0:
+    #         os.remove(self.mp4_file_path)
+    #         ffmpeg_cmd = f'ffmpeg -framerate 24 -start_number {self.start_frame} -i {self.image_file_path} -frames:v {self.end_frame} {self.mp4_file_path}'
+    #         subprocess.run(ffmpeg_cmd, shell=True)
+    #         self.warning_message('Converting is Done')
+    #     else: 
+    #         pass
         
         
 def main():
