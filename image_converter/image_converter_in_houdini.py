@@ -82,6 +82,7 @@ class ImageConverting:
             
         if os.path.exists(self.mp4_file_path):
             os.remove(self.mp4_file_path)
+            # self.yes_or_no_window()
             
         if end_to_start != render_dir_count:
             self.node.parm('trange').set(1)

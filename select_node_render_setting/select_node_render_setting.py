@@ -1,3 +1,5 @@
+import hou
+
 def select_count_node():
     selected_node = hou.selectedNodes()
     
