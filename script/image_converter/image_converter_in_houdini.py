@@ -38,31 +38,35 @@ class ImageConverting:
         root_path = image_path.split('/')
         
         self.file_name = root_path[-1]
-        render_dir_name = root_path[-2]
-        jpg_dir_name = root_path[-3]
+        ver_num = root_path[-2]
+        render_dir_name = root_path[-3]
+        jpg_dir_name = root_path[-4]
         
-        for i in range(0,3):
+        
+        for i in range(0,4):
             del root_path[-1]
 
         root_path = '/'.join(root_path)
+        
         
         file_name_split = self.file_name.split('.')
         self.ext = file_name_split[-1]
         
         
-        for i in range(0,2):
+        for i in range(0,3):
             del file_name_split[-1]        
         
         self.file_name = '.'.join(file_name_split)     
-
-        mp4_path = f'{root_path}/mp4/{self.file_name}'
         
+
+        mp4_path = f'{root_path}/mp4/{self.file_name}/{ver_num}'
+
         if not os.path.exists(mp4_path):
             os.makedirs(mp4_path)
                 
-        self.mp4_file_path = f'{mp4_path}/{self.file_name}.mp4'
-        self.render_path = f'{root_path}/{jpg_dir_name}/{render_dir_name}'
-        self.image_file_path = f'{self.render_path}/{self.file_name}.%04d.{self.ext}'
+        self.mp4_file_path = f'{mp4_path}/{self.file_name}.{ver_num}.mp4'
+        self.render_path = f'{root_path}/{jpg_dir_name}/{render_dir_name}/{ver_num}'
+        self.image_file_path = f'{self.render_path}/{self.file_name}.{ver_num}.%04d.{self.ext}'
         
    
     def convert_action(self):
@@ -82,7 +86,6 @@ class ImageConverting:
             
         if os.path.exists(self.mp4_file_path):
             os.remove(self.mp4_file_path)
-            # self.yes_or_no_window()
             
         if end_to_start != render_dir_count:
             self.node.parm('trange').set(1)

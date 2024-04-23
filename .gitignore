@@ -1,0 +1,8 @@
+# Default ignored files
+.idea
+/parks_tools/pipline_tool/fx_pipline/python/.config/*
+/parks_tools/pipline_tool/fx_pipline/python/__pycache__/*
+/parks_tools/pipline_tool/mp4_downloader/python/action_log/*
+
+*.pyc
+*.json
