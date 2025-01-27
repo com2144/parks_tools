@@ -39,14 +39,14 @@ class Rename:
             return
 
         if not self.file_list: 
-            self.file_list = rename_ui.FileRistWidget( self.ui )
+            self.file_list = rename_ui.FileListWidget( self.ui )
             self.file_list.list_view.addItems( file_list )
             self.file_list.show()
             self.file_list.setAttribute( rename_ui.Qt.WA_DeleteOnClose )
             self.file_list.destroyed.connect( lambda : setattr(self, 'file_list', None) )
         elif self.file_list.isVisible():
             self.file_list.close()
-            self.file_list = rename_ui.FileRistWidget( self.ui )
+            self.file_list = rename_ui.FileListWidget( self.ui )
             self.file_list.list_view.addItems( file_list )
             self.file_list.show()
 

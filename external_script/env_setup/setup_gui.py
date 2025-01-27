@@ -18,6 +18,7 @@ class EnvSetupUi( QDialog ):
         font = QFont()
         font.setPointSize( 13 )
         font.setPixelSize( 13 )
+        self.setFont( font )
 
         self.env_cb = QComboBox()
         
