@@ -101,7 +101,7 @@ class Rename:
         origin_path_list = [ os.path.join(self.model.save_path, file).replace('/', '\\') 
                             for file in os.listdir(self.model.save_path)
                             if os.path.splitext(file)[-1].lower() in self.model.filter_ext ]
-        
+
         target_path_list = self.rename_info( origin_path_list, self.model.rn_list )
 
         if isinstance( target_path_list, dict ):
@@ -167,6 +167,7 @@ class Rename:
         self.ui.message_box( 'info', 'Rename Info', 'Rename is success' )
         self.init_ui_set()
 
+
     def rename_info( self, origin_info, rn_list ):
         error_list = []
         updated_list = copy.copy( origin_info )
@@ -179,6 +180,9 @@ class Rename:
                 parent_dir = os.path.dirname( os.path.dirname(origin_path) )
                 parent_dir_name = origin_path.split( os.sep )[-2]
                 origin_file_name, ext = os.path.splitext( os.path.basename(origin_path) )
+
+                if not source_txt and not target_txt:
+                    error_list.append( f'[{idx}] source and target input the letter.')
 
                 if source_txt not in origin_path:
                     error_list.append( f'[{idx}] "{source_txt}" not in {origin_path}' )
