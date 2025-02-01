@@ -168,7 +168,7 @@ class OrigTable( QTableWidget ):
         self.removeRow( row )
 
         if row < len( self.items ):
-            del self.items[row]
+            self.items.pop( row )
             self.itemsUpdated.emit( self.items )
             for i in range( self.rowCount() ):
                 rm_widget = self.cellWidget(i, 0)

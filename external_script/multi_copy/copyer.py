@@ -43,7 +43,7 @@ class Copyer:
                     self.model.orig_path_list.append( item )
             
             else:
-                self.model.target_path_list.append( item )
+                self.model.orig_path_list.append( item )
         
         if self.log:
             if warning_msg:
