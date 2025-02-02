@@ -294,9 +294,9 @@ class Convert:
                 result = subprocess.run( cmd, capture_output=True, text=True )
 
                 if result.stderr:
-                    success_list.append( output_path )
+                    success_list.append( f'[{idx}] - {output_path}' )
                 else:
-                    fail_iist.append( output_path )
+                    fail_iist.append( f'[{idx}] - {output_path}' )
         
         msg = ''
         if success_list:
