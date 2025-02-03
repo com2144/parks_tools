@@ -25,13 +25,19 @@ class CopyUi( QDialog ):
 
 
         orig_lb = QLabel( f'{"Orig":<10}' )
+        self.orig_clear_btn = QPushButton( 'Clear' )
+        self.orig_clear_btn.setFixedWidth( 70 )
+
+        orig_info_lay = QHBoxLayout()
+        orig_info_lay.addWidget( orig_lb )
+        orig_info_lay.addWidget( self.orig_clear_btn )
+
         self.orig_tbl = OrigTable()
         self.orig_tbl.setMinimumWidth( 100 )
 
         orig_lay = QVBoxLayout()
-        orig_lay.addWidget( orig_lb )
+        orig_lay.addLayout( orig_info_lay )
         orig_lay.addWidget( self.orig_tbl )
-
 
         copy_lb = QLabel( f'{">>>":^13}' )
 

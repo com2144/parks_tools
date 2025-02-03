@@ -20,16 +20,20 @@ class Copyer:
         self.ui.target_tbl.itemsUpdated.connect( self.ttl_update_content )
 
         self.ui.log_chk.toggled.connect( self.log_sig )
+        self.ui.orig_clear_btn.clicked.connect( self.orig_clear )
         self.ui.copy_btn.clicked.connect( self.copy_act )
         self.ui.cancel_btn.clicked.connect( self.ui.close )
 
     
     def otl_get_content( self, items ):
-        self.ui.orig_tbl.clear()
         warning_msg = []
 
+
         for item in items:
-            if os.path.isdir( item ) and len( os.listdir( item ) ) == 0:
+            if item in self.model.orig_path_list:
+                warning_msg.append( f'Already exists :: {item}' )
+
+            elif os.path.isdir( item ) and len( os.listdir( item ) ) == 0:
                 warning_msg.append( f'Folder is empty :: {item}' )
 
             elif os.path.isfile( item ):
@@ -107,6 +111,17 @@ class Copyer:
             self.log.show()
         else:
             self.log.close()
+
+    
+    def orig_clear( self ):
+        self.ui.orig_tbl.clear()
+        self.ui.orig_tbl.setRowCount( 0 )
+
+        if self.model.orig_path_list:
+            self.model.orig_path_list = []
+        
+        if self.log:
+            self.log.set_log( 'Clear Origin Path' )
 
 
     def copy_act( self ):
