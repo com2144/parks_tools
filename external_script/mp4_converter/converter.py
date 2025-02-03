@@ -55,14 +55,14 @@ class Convert:
     def dtl_get_content( self, items ):
         warning_msg = []
 
-        pattern = r'^([\w\-]+_v\d{3})$'
+        pattern = r'^([\w\-]+_v\d{3})\.(\d+)$'
         items_name = []
         for item in items:
             base_name = os.path.basename( item )
             file_name = os.path.splitext( base_name )[0]
             if re.match( pattern, file_name ):
                 file_name = file_name.split( '.' )[:-1]
-
+            
             items_name.append( file_name )
         
         datas_name = []
@@ -87,7 +87,6 @@ class Convert:
             self.ui.message_box( 'error', 'Duplicate Error', msg )
             return
         
-        self.ui.data_tbl.clear()
 
         for item in items:
             if os.path.isdir( item ):

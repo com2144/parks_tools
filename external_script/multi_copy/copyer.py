@@ -60,7 +60,15 @@ class Copyer:
 
     def otl_update_content( self, items ):
         self.model.orig_path_list = items
-    
+
+        if self.log:
+            msg = 'source list\n'
+            msg += ('=' * 10) + '\n' 
+            msg += '\n'.join( self.model.orig_path_list )
+            msg += ('=' * 10) + '\n'
+
+            self.log.set_log( msg )
+
 
     def ttl_get_content( self, items ):
         self.ui.target_tbl.clear()
@@ -83,6 +91,14 @@ class Copyer:
     
     def ttl_update_content( self, items ):
         self.model.target_path_list = items
+
+        if self.log:
+            msg = 'target path\n'
+            msg += ('=' * 10) + '\n' 
+            msg += '\n'.join( self.model.target_path_list )
+            msg += ('=' * 10) + '\n'
+
+            self.log.set_log( msg )
 
 
     def log_sig( self ):
