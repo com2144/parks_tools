@@ -54,11 +54,13 @@ class EnvSetup:
         parks_tool_dir = NOW_PATH
         for i in range(2):
             parks_tool_dir = os.path.dirname( parks_tool_dir )
+        
+        parks_tool_dir = parks_tool_dir.replace('\\', '/')
 
-        parks_tool_site = '${' + 'PSJ_SITE' + '}'
+        parks_tool_site = '$PSJ_SITE'
 
-        parks_otls = parks_tool_site + os.sep + 'otls'
-        parks_tool_bar = parks_tool_site + os.sep + 'toolbar'
+        parks_otls = parks_tool_site + '/otls'
+        parks_tool_bar = parks_tool_site + '/toolbar'
 
         houdini_version = str(self.ui.env_cb.currentText())
         env_file = self.model.version_env_dict[ houdini_version ]
@@ -66,14 +68,19 @@ class EnvSetup:
         env_data = open( env_file, 'r' )
         env_data = env_data.read()
 
+        if platform.system() == 'Windows':
+            divide = ';'
+        else:
+            divide = ':'
+
         content = '\n#PSJ_SITE\n'
         content += f'PSJ_SITE = "{parks_tool_dir}"\n'
 
         content += '\n#PSJ_OTLS\n'
-        content += f'HOUDINI_OTLSCAN_PATH = "{parks_otls}":@/otls\n'
+        content += f'HOUDINI_OTLSCAN_PATH = @/otls{divide}{parks_otls}\n'
 
         content += '\n#PSJ_TOOLBAR\n'
-        content += f'HOUDINI_TOOLBAR_PATH = "{parks_tool_bar}":@/toolbar\n'
+        content += f'HOUDINI_TOOLBAR_PATH = @/toolbar{divide}{parks_tool_bar}\n'
         
         if content not in env_data:
             try:
