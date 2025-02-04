@@ -8,7 +8,7 @@ import setup_gui
 from setup_model import EnvSetupModel
 
 
-NOW_PATH = os.path.dirname( os.path.abspath( __file__ ) )
+NOW_PATH = os.path.dirname( os.path.abspath(sys.argv[0]) )
 
 
 class EnvSetup:
@@ -74,7 +74,7 @@ class EnvSetup:
             divide = ':'
 
         content = '\n#PSJ_SITE\n'
-        content += f'PSJ_SITE = "{parks_tool_dir}"\n'
+        content += f'PSJ_SITE = {parks_tool_dir}\n'
 
         content += '\n#PSJ_OTLS\n'
         content += f'HOUDINI_OTLSCAN_PATH = @/otls{divide}{parks_otls}\n'
