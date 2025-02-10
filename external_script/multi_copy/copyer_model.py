@@ -3,4 +3,4 @@ class CopyerModel:
     target_path_list = []
 
     ext_list = ['.mov', '.mp4', '.dpx', '.exr',
-                  '.jpg', '.jpge', '.png', '.tiff']
+                  '.jpg', '.jpeg', '.png', '.tiff']
