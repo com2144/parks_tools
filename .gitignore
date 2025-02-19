@@ -1,5 +1,6 @@
 # Default ignored files
 .idea
+.preset
 __pycache__
 
 *.pyc

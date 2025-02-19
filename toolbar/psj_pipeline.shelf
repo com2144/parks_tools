@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="psj_pipeline" label="psj_pipeline">
+    <memberTool name="fx_pipeline"/>
+  </toolshelf>
+
+  <tool name="fx_pipeline" label="FX Pipeline" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir, 
+                'script', 
+                'fx_pipeline').replace('\\', '/') )
+
+import fx_pipeline
+reload( fx_pipeline )
+
+win = fx_pipeline.PipelineSetup()
+win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
+win.ui.show()]]></script>
+  </tool>
+</shelfDocument>

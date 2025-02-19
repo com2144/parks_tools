@@ -1,6 +1,7 @@
 import hou
 
-def center_pivot():
+
+def load():
     selected_node = hou.selectedNodes()[0]
     
     node_path = selected_node.path()
@@ -20,5 +21,3 @@ def center_pivot():
         pivot_rotate[2].setExpression('$CEZ')
     else:
         hou.ui.displayMessage('Choose the "transform" node', severity=hou.severityType.ImportantMessage)
-            
-center_pivot()
