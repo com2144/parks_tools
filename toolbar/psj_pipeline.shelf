@@ -7,6 +7,7 @@
 
   <toolshelf name="psj_pipeline" label="psj_pipeline">
     <memberTool name="fx_pipeline"/>
+    <memberTool name="keep_work_file"/>
   </toolshelf>
 
   <tool name="fx_pipeline" label="FX Pipeline" icon="PLASMA_App">
@@ -28,5 +29,24 @@ reload( fx_pipeline )
 win = fx_pipeline.PipelineSetup()
 win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
 win.ui.show()]]></script>
+  </tool>
+
+  <tool name="keep_work_file" label="Keep hip file" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+
+import hou
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir,
+                 'script',
+                 'keep_working_file').replace('\\', '/') )
+
+import keep_working_file
+reload(keep_working_file)
+
+keep_working_file.load()]]></script>
   </tool>
 </shelfDocument>

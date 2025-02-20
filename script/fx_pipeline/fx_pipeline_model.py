@@ -1,6 +1,7 @@
 
 class PipelineSetupModel:
     preset_dict = {}
+    preset_json = ''
 
     save_dir_path = ''
     save_ext = ''

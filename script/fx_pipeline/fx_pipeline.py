@@ -72,8 +72,10 @@ class PipelineSetup:
                 self.init_houdini_set( self.model.houdini_dir_path, ext )
         
         self.model.preset_dict['home'] = self.model.save_dir_path
-        with open( self.model.preset_dict, 'w' ) as file:
+        with open( self.model.preset_json, 'w' ) as file:
             json.dump( self.model.preset_dict, file)
+        
+        self.ui.close()
 
 
     def path_tree_init_set( self, tree_type ):
@@ -82,7 +84,7 @@ class PipelineSetup:
 
             for task_item in task_list:
                 if task_item == 'fx':
-                    shot_list = ['work', 'ref']
+                    shot_list = ['work', 'ref', 'keep']
 
                     work_list = ['houdini', 'nuke', 'maya', 'cam', 'review']
                     ref_list = ['artwork', 'footage']
@@ -124,7 +126,7 @@ class PipelineSetup:
                                         if not os.path.exists( nuke_item_path ):
                                             os.makedirs( nuke_item_path )
                         
-                        else:
+                        elif shot_item == 'ref':
                             for ref_item in ref_list:
                                 ref_item_path = os.path.join( self.model.shot_path,
                                                             task_item,
@@ -132,6 +134,13 @@ class PipelineSetup:
                                                             ref_item )
                                 if not os.path.exists( ref_item_path ):
                                     os.makedirs( ref_item_path )
+                        
+                        else:
+                            keep_path = os.path.join( self.model.shot_path,
+                                                        task_item,
+                                                        shot_item)
+                            if not os.path.exists( keep_path ):
+                                os.makedirs( keep_path )
                 
                 else:
                     plate_list = ['jpg', 'png', 'mov', 'mp4']
@@ -154,14 +163,13 @@ class PipelineSetup:
 
 
     def init_houdini_set( self, dir_path, ext ):
-        houdini_file_name = os.path.join( dir_path, f'shot_work_fx.v001.{ext}' )
+        houdini_file_name = os.path.join( dir_path, f'{self.model.project_name}_shot_work_fx.v001.{ext}' )
         if not os.path.exists( houdini_file_name ):
             hou.hipFile.save( houdini_file_name, save_to_recent_files=False )
-            hip_file = hou.hipFile.load( houdini_file_name )
+            hou.hipFile.load( houdini_file_name )
             playbar = hou.playbar
             first_frame = 1001
             playbar.setFrameRange( first_frame, first_frame + 240 )
-            hou.hipFile.save( hip_file, save_to_recent_files=False )
 
 
     def preset_init( self ):
@@ -169,15 +177,15 @@ class PipelineSetup:
         if not os.path.exists( preset_dir ):
             os.makedirs( preset_dir )
         
-        preset_json = os.path.join( preset_dir, 'user_preset.json' )
-        if not os.path.exists( preset_json ):
+        self.model.preset_json = os.path.join( preset_dir, 'user_preset.json' )
+        if not os.path.exists( self.model.preset_json ):
             self.model.preset_dict = { 'home': '' }
 
-            with open( preset_json, 'w' ) as file:
+            with open( self.model.preset_json, 'w' ) as file:
                 json.dump( self.model.preset_dict, file )
         
         else:
-            with open( preset_json, 'r' ) as file:
+            with open( self.model.preset_json, 'r' ) as file:
                 self.model.preset_dict = json.load( file )
 
             if self.model.preset_dict['home']:
@@ -192,4 +200,5 @@ class PipelineSetup:
                 
                 if preset_sig == 0:
                     self.ui.save_dir_edt.setText( self.model.preset_dict['home'] )
+                    self.model.save_dir_path = self.model.preset_dict['home']
 
