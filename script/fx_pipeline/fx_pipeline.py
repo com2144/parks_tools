@@ -91,7 +91,7 @@ class PipelineSetup:
 
                     houdini_list = ['cache', 'script', 'tmp']
                     nuke_list = ['stock', 'script', 'tmp']
-                    review_list = ['exr', 'png', 'mov', 'mp4', 'tmp']
+                    review_list = ['exr', 'png', 'mov', 'mp4', 'tmp', 'jpg']
 
                     for shot_item in shot_list:
                         if shot_item == 'work':

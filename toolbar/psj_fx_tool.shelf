@@ -10,6 +10,7 @@
     <memberTool name="center_pivot_extract"/>
     <memberTool name="prim_spliter"/>
     <memberTool name="point_spliter"/>
+    <memberTool name="import_repather"/>
   </toolshelf>
 
   <tool name="center_pivot_extract" label="Center Pivot Extract" icon="PLASMA_App">
@@ -94,5 +95,31 @@ import memory_clear
 reload(memory_clear)
 
 memory_clear.load()]]></script>
+  </tool>
+
+  <tool name="import_repather" label="Import Repather" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir, 
+                'script', 
+                'import_repath').replace('\\', '/') )
+
+import import_repath
+reload( import_repath )
+
+if hou.selectedNodes():
+    win = import_repath.ImportRepath( hou.selectedNodes() )
+    win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
+    win.ui.show()
+
+else:
+    hou.ui.displayMessage( 'Select the node plz', 
+                        severity=hou.severityType.Error )]]></script>
   </tool>
 </shelfDocument>
