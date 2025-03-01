@@ -11,6 +11,7 @@
     <memberTool name="prim_spliter"/>
     <memberTool name="point_spliter"/>
     <memberTool name="import_repather"/>
+    <memberTool name="multi_rendering"/>
   </toolshelf>
 
   <tool name="center_pivot_extract" label="Center Pivot Extract" icon="PLASMA_App">
@@ -121,5 +122,42 @@ if hou.selectedNodes():
 else:
     hou.ui.displayMessage( 'Select the node plz', 
                         severity=hou.severityType.Error )]]></script>
+  </tool>
+
+  <tool name="multi_rendering" label="Multi Rendering" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+import json
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+multi_rendering_dir = os.path.join(psj_dir, 
+                                    'script', 
+                                    'multi_rendering').replace('\\', '/') 
+
+sys.path.append( multi_rendering_dir )
+import multi_rendering
+reload( multi_rendering )
+
+hipfile = os.path.splitext( os.path.basename(hou.hipFile.path()) )[0]
+
+preset_json_file = os.path.join( multi_rendering_dir, 
+                                '.preset', 
+                                f'{hipfile}.json' ).replace('\\', '/')
+
+if os.path.exists( preset_json_file ):
+    with open( preset_json_file, 'r' ) as file:
+        preset_dict = json.load( file )
+else:
+    preset_dict = None
+
+win = multi_rendering.MultiRendering( preset_dict )
+win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
+win.ui.show()
+
+]]></script>
   </tool>
 </shelfDocument>
