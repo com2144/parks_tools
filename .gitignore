@@ -2,6 +2,7 @@
 .idea
 .preset
 __pycache__
+backup
 
 *.pyc
 *.json

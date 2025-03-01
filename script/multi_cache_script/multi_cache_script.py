@@ -1,6 +1,25 @@
 import hou
 import os
 
+
+def task_chk(node):
+    check = node.parm("cache_list_check").eval()
+    instance_count = get_multiparm_instance_count(node, "cache_check")
+    
+    for idx in range( instance_count ):
+        node.parm(f"cache_check{idx+1}").set(check)
+
+
+def get_multiparm_instance_count(node, base_name):
+    count = 0
+    while True:
+        parm = node.parm(f"{base_name}{count+1}")
+        if parm is None:
+            break
+        count += 1
+    return count
+
+
 def selectnode(node, parm_index):
     select_cache_node = hou.ui.selectNode(node_type_filter=hou.nodeTypeFilter.Sop, title='Choose the Filecache Node')
     cache_node = hou.node(select_cache_node)
@@ -9,42 +28,48 @@ def selectnode(node, parm_index):
         cache_range = cache_node.parmTuple('f').eval()
         cache_node_type = cache_node.type().name()
         
-        path_parm = node.parm("path"+parm_index)
+        path_parm = node.parm(f"path{parm_index}")
         range_parm = node.parmTuple(f'range{parm_index}_')
         
         if cache_node_type == 'filecache::2.0' and path_parm.eval() != select_cache_node:
             path_parm.set(select_cache_node)
             range_parm.set((cache_range[0], cache_range[1]))
             statuscolor(node, parm_index)
+            
         elif path_parm.eval() == select_cache_node:
             message_window('이미 선택한 node입니다.')
+            
         else:
             message_window('filecache node를 선택해주세요.')
+            
     else:
         message_window('filecache node를 선택해주세요.')
+
         
 def drag_node(node, parm_index):
-    path = node.parm('path'+parm_index).eval()
+    path = node.parm(f"path{parm_index}").eval()
     cache_node = hou.node(path)
     
     if cache_node is not None:
         cache_range = cache_node.parmTuple('f').eval()
         cache_node_type = cache_node.type().name()
     
-        path_parm = node.parm("path"+parm_index)
+        path_parm = node.parm(f"path{parm_index}")
         range_parm = node.parmTuple(f'range{parm_index}_')
         
         if cache_node_type == 'filecache::2.0':
             range_parm = node.parmTuple(f'range{parm_index}_')
             range_parm.set((cache_range[0],cache_range[1]))
             statuscolor(node, parm_index)
+            
         else:
-            node.parm('path'+parm_index).set('')
+            path_parm.set('')
             hou.ui.displayMessage('filecache node를 선택하세요.')    
 
+            
 def openPath(node, parm_index):
-    if node.parm("path"+parm_index).eval():
-        filecache_node = node.parm("path"+parm_index).evalAsNode() # select file cache node
+    if node.parm(f"path{parm_index}").eval():
+        filecache_node = node.parm(f"path{parm_index}").evalAsNode() # select file cache node
         filepath = filecache_node.parm("sopoutput").eval()
         
         split_path = filepath.split("/")
@@ -54,14 +79,16 @@ def openPath(node, parm_index):
             
         if os.path.exists(dir_path):
             hou.ui.showInFileBrowser(dir_path)
+            
         else:
             message_window(f'{dir_path}의 경로를 찾을 수 없습니다.')
     else:
         message_window(f'{node.parm("path"+parm_index).name()}가 비어있습니다.')        
 
+        
 def set_origin(node, parm_index):
     range_parm = node.parmTuple(f"range{parm_index}_")
-    path = node.parm("path"+parm_index).evalAsNode()
+    path = node.parm(f"path{parm_index}").evalAsNode()
     
     path.parmTuple('f').revertToDefaults()
     orig_range = path.parmTuple('f').eval()
@@ -69,9 +96,10 @@ def set_origin(node, parm_index):
     
     statuscolor(node, parm_index)
 
+    
 def set_override(node, parm_index):
     range_parm = node.parmTuple(f"range{parm_index}_")
-    path = node.parm("path"+parm_index).evalAsNode()
+    path = node.parm(f"path{parm_index}").evalAsNode()
     
     frame_in = range_parm.eval()
     origin_frame = path.parmTuple('f')
@@ -80,6 +108,7 @@ def set_override(node, parm_index):
     
     statuscolor(node, parm_index)
 
+    
 def exec_cache(folder_count):
     node = hou.pwd()
     for i in range(folder_count):
@@ -92,10 +121,12 @@ def exec_cache(folder_count):
             cache_node.parm('reload').pressButton()
             cache_node.parm('basename').set(origin_name)
             statuscolor(node, str(i+1))
+            
     message_window('Cache가 완료되었습니다.')
-        
+
+    
 def statuscolor(node, parm_index):
-    cache_node = node.parm("path"+parm_index).evalAsNode()
+    cache_node = node.parm(f"path{parm_index}").evalAsNode()
     cache_range = cache_node.parmTuple('f').eval()
 
     filepath = cache_node.parm("sopoutput").eval()
@@ -107,11 +138,14 @@ def statuscolor(node, parm_index):
     
     
     if os.path.exists(dir_path) and len(os.listdir(dir_path)) == int(cache_range[1]-cache_range[0]+1):
-        node.parmTuple('status'+parm_index).set((0,1,0))
+        node.parmTuple(f'status{parm_index}').set((0,1,0))
+        
     elif os.path.exists(dir_path) and len(os.listdir(dir_path)) != int(cache_range[1]-cache_range[0]+1):
-        node.parmTuple('status'+parm_index).set((1,1,0))
+        node.parmTuple(f'status{parm_index}').set((1,1,0))
+        
     else:
-        node.parmTuple('status'+parm_index).set((1,0,0))  
+        node.parmTuple(f'status{parm_index}').set((1,0,0))  
 
+        
 def message_window(message):
     hou.ui.displayMessage(message, severity=hou.severityType.ImportantMessage)
