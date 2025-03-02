@@ -110,7 +110,7 @@ Use the Up/Down buttons to adjust the render order.
 - After rendering, a preset is saved in the current hip file, so the next time you open it, the render nodes will automatically be loaded in the correct order.
 <br></br>
 
-### point_spliter, prim_spliter
+### 7 .point_spliter, prim_spliter
 - When specifying `Point` and `Prim` attributes, the tool divides the area into clusters based on the given attribute.
 - If rendering is required, it automatically creates separate `Mantra` nodes for each clustered area.
 - The cluster-related attribute must be an `int` value.
