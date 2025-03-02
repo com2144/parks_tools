@@ -457,9 +457,10 @@ class RemoveBtnWidget( QWidget ):
         super().__init__( parent )
         self.row = row
 
-        self.rm_btn = QPushButton()
-        self.rm_btn.setIcon( QIcon( os.path.join( ICON, 'minus.png' ) ) )
-        self.rm_btn.setFlat( True )
+        self.rm_btn = QPushButton( '−' )
+
+        # self.rm_btn.setIcon( QIcon( os.path.join( ICON, 'minus.png' ) ) )
+        # self.rm_btn.setFlat( True )
         self.rm_btn.setMinimumSize( QSize( 50, 30 ) )
         self.rm_btn.setMaximumSize( QSize( 50, 30 ) )
 
