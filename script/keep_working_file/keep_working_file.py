@@ -31,8 +31,8 @@ def load():
     now = now.strftime( '%Y-%m-%d' )
 
     current_file_name, ext = os.path.splitext( os.path.basename(current_path) )
-    current_file_name_split = current_file_name.split('.')
-    current_ver = current_file_name_split[1]
+    current_file_name_split = current_file_name.split('_')
+    current_ver = current_file_name_split[-1]
 
     match = re.match( r"v\d{3}$", current_ver )
 
@@ -51,17 +51,17 @@ def load():
         new_ver = f'v{ver_num+1:03d}'
 
         if memo:
-            new_file_name = f'{current_file_name_split[0]}_{memo}.{new_ver}{ext}'
+            new_file_name = f'{current_file_name_split[0]}_{memo}_{new_ver}{ext}'
         else:
-            new_file_name = f'{current_file_name_split[0]}.{new_ver}{ext}'
+            new_file_name = f'{current_file_name_split[0]}_{new_ver}{ext}'
         
         new_file_path = os.path.join( houdini_dir, new_file_name )
     
     else:
         if memo:
-            new_file_name = f'{current_file_name_split[0]}_{now}_{memo}.{new_ver}{ext}'
+            new_file_name = f'{current_file_name_split[0]}_{now}_{memo}_{new_ver}{ext}'
         else:
-            new_file_name = f'{current_file_name_split[0]}_{now}.{new_ver}{ext}'
+            new_file_name = f'{current_file_name_split[0]}_{now}_{new_ver}{ext}'
         
         new_file_path = os.path.join( houdini_dir, new_file_name )
 
