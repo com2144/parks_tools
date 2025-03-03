@@ -98,7 +98,7 @@ pip install PySide2
 - It helps clear background memory while working with hip files.
 <br></br>
 
-### 6. multi_cache_script
+### 6. multi_rendering
 <img src="https://github.com/user-attachments/assets/f1e9d7e6-5c38-487e-99a7-75b18f577c8e" width="30%" height="auto">
 <img src="https://github.com/user-attachments/assets/dad5480b-2147-42c9-96d7-66ac0e0615a0" width="30%" height="auto">
 <img src="https://github.com/user-attachments/assets/6ce75f3a-ea47-45f6-8f72-b4cb8d87049e" width="30%" height="auto">
@@ -110,7 +110,7 @@ Use the Up/Down buttons to adjust the render order.
 - After rendering, a preset is saved in the current hip file, so the next time you open it, the render nodes will automatically be loaded in the correct order.
 <br></br>
 
-### 7 .point_spliter, prim_spliter
+### 7. point_spliter, prim_spliter
 - When specifying `Point` and `Prim` attributes, the tool divides the area into clusters based on the given attribute.
 - If rendering is required, it automatically creates separate `Mantra` nodes for each clustered area.
 - The cluster-related attribute must be an `int` value.
