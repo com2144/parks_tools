@@ -28,6 +28,7 @@ def load( data ):
             for i in range(max_value+1):
                 blast_node = hou.node(parent_path).createNode('blast', f'blast_{data}_{i}')
                 blast_node.parm('group').set(f'@{data}=={i}')
+                blast_node.parm('grouptype').set(4)
                 blast_node.parm('negate').set(1)
                 blast_node.setFirstInput(node)
                 blast_node.moveToGoodPosition()

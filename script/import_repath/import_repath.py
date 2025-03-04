@@ -84,8 +84,8 @@ class ImportRepath:
                             wg_list.append( node.parm('file') )
 
                         elif select_node.type().name() == 'usdimport':
-                            path_lb_item.lb.setText( node.parm('usdimport').eval() )
-                            wg_list.append( node.parm('usdimport') )
+                            path_lb_item.lb.setText( node.parm('filepath1').eval() )
+                            wg_list.append( node.parm('filepath1') )
                         
                         sel_tbl.setCellWidget( row_idx, col_idx, path_lb_item )
                     
@@ -100,6 +100,7 @@ class ImportRepath:
 
         rn_tbl.setRowCount( 1 )
 
+        tmp_tbl_list = []
         wg_list = []
         for col_idx in range( column_count ):
             if col_idx == 0:
@@ -112,7 +113,8 @@ class ImportRepath:
                 rn_tbl.setCellWidget( 0, col_idx, tr_item )
                 wg_list.append( tr_item.line_edt )
         
-        self.model.rn_list.append( wg_list )
+        tmp_tbl_list.append( wg_list )
+        self.model.rn_list = tmp_tbl_list
 
 
     def add_item( self ):
@@ -121,7 +123,8 @@ class ImportRepath:
         column_count = rn_tbl.columnCount()
 
         rn_tbl.setRowCount( row_count + 1 )
-
+        
+        tmp_tbl_list = []
         wg_list = []
         for col_idx in range( column_count ):
             if col_idx == 0:
@@ -134,7 +137,8 @@ class ImportRepath:
                 rn_tbl.setCellWidget( row_count, col_idx, tr_item )
                 wg_list.append( tr_item.line_edt )
         
-        self.model.rn_list.append( wg_list )
+        tmp_tbl_list.append( wg_list )
+        self.model.rn_list.extend( tmp_tbl_list )
 
 
     def remove_item( self ):
@@ -157,10 +161,8 @@ class ImportRepath:
         
         else:
             self.ui.sel_tbl.clear()
-            self.model.select_data_list = []
-            self._set_sel_tbl( replace=True )
             self.ui.rn_tbl.clear()
-            self.model.rn_list = []
+            self._set_sel_tbl( replace=True )
             self._set_init_rn_wg()
             
             hou.ui.displayMessage( 'RePath is success.',
