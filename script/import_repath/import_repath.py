@@ -63,7 +63,7 @@ class ImportRepath:
                         chkbox_item.chk_box.setCheckable( True )
                         chkbox_item.chk_box.setChecked( True )
                         sel_tbl.setCellWidget( row_idx, col_idx, chkbox_item )
-                        wg_list.append( chkbox_item.chk_box.isChecked() )
+                        wg_list.append( chkbox_item.chk_box )
                     
                     elif col_idx == 1:
                         node_name = hou.node( select_node.path() ).name()
@@ -178,7 +178,7 @@ class ImportRepath:
             target_txt = str( tr.text() )
 
             for idx, item in enumerate( updated_list ):
-                if item[0]:
+                if item[0].isChecked():
                     path, ext = os.path.splitext( item[1].eval() )
 
                     if not source_txt and target_txt:
