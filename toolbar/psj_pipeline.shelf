@@ -8,6 +8,7 @@
   <toolshelf name="psj_pipeline" label="psj_pipeline">
     <memberTool name="fx_pipeline"/>
     <memberTool name="keep_work_file"/>
+    <memberTool name="render_naming"/>
   </toolshelf>
 
   <tool name="fx_pipeline" label="FX Pipeline" icon="PLASMA_App">
@@ -48,5 +49,32 @@ import keep_working_file
 reload(keep_working_file)
 
 keep_working_file.load()]]></script>
+  </tool>
+
+  <tool name="render_naming" label="Render Namer" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir, 
+                'script', 
+                'render_naming').replace('\\', '/') )
+
+import render_naming
+reload( render_naming )
+
+if hou.selectedNodes():
+    win = render_naming.RenderNaming( hou.selectedNodes() )
+    if win.valid:
+        win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
+        win.ui.show()
+
+else:
+    hou.ui.displayMessage( 'Select the node plz', 
+                        severity=hou.severityType.Error )]]></script>
   </tool>
 </shelfDocument>

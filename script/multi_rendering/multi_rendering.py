@@ -84,7 +84,7 @@ class MultiRendering:
         render_tbl = self.ui.render_tbl
         column_count = render_tbl.columnCount()
 
-        tmp_tbl_list = self.model.render_list
+        tmp_tbl_list = []
 
         duplicate_found_list = []
         if tmp_tbl_list:
@@ -244,8 +244,8 @@ class MultiRendering:
         current_lb_wg.lb.setText( str(current_val + 1) )
         target_lb_wg.lb.setText( str(current_val) )
 
-        self.model.render_list[current_row], self.model.render_list[current_row + 1] = \
-            self.model.render_list[current_row + 1], self.model.render_list[current_row]
+        self.model.render_list[current_row], self.model.render_list[target_row] = \
+            self.model.render_list[target_row], self.model.render_list[current_row]
 
 
     def render_check_action( self, toggled ):
