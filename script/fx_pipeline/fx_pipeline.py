@@ -169,7 +169,7 @@ class PipelineSetup:
             hou.hipFile.load( houdini_file_name )
             playbar = hou.playbar
             first_frame = 1001
-            playbar.setFrameRange( first_frame, first_frame + 240 )
+            playbar.setFrameRange( first_frame, first_frame + 240 - 1 )
 
 
     def preset_init( self ):

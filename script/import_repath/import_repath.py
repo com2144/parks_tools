@@ -161,7 +161,9 @@ class ImportRepath:
         
         else:
             self.ui.sel_tbl.clear()
+            self.ui.sel_tbl.setHorizontalHeaderLabels( ['Check', 'Node name', 'File Path'] )
             self.ui.rn_tbl.clear()
+            self.ui.rn_tbl.setHorizontalHeaderLabels( ['Origin', 'Target'] )
             self._set_sel_tbl( replace=True )
             self._set_init_rn_wg()
             

@@ -63,7 +63,7 @@ pip install PySide2
     - `psj_fx_tool`
         - ![Image](https://github.com/user-attachments/assets/4687fc44-4cd8-4a9e-8864-48edd2e74530)
     - `psj_pipeline`
-        - ![Image](https://github.com/user-attachments/assets/47230040-c2f9-4386-bb83-c1d89631cdde)
+        - ![Image](https://github.com/user-attachments/assets/cf708d7e-961c-4698-bba8-e45047961046)
 <br></br>
 
 ### 1. center_pivot_extract
@@ -114,3 +114,10 @@ Use the Up/Down buttons to adjust the render order.
 - When specifying `Point` and `Prim` attributes, the tool divides the area into clusters based on the given attribute.
 - If rendering is required, it automatically creates separate `Mantra` nodes for each clustered area.
 - The cluster-related attribute must be an `int` value.
+<br></br>
+
+### 8. render_naming
+<img src="https://github.com/user-attachments/assets/baec1a80-7b72-475c-834a-35b59641f2c1" width="50%" height="auto">
+
+- You can create a project using psj_fx_pipeline and use it afterward.
+- This tool allows you to name render output files and supports version upgrades.
