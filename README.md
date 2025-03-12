@@ -61,44 +61,30 @@ pip install PySide2
 ## Script
 - When running in Houdini, this can be executed through `psj_fx_tool` and `psj_pipeline` tools.
     - `psj_fx_tool`
-        - ![Image](https://github.com/user-attachments/assets/4687fc44-4cd8-4a9e-8864-48edd2e74530)
+        - ![Image](https://github.com/user-attachments/assets/02ea766b-3ca7-4dc3-9636-e29d9e0c0e6f)
     - `psj_pipeline`
         - ![Image](https://github.com/user-attachments/assets/cf708d7e-961c-4698-bba8-e45047961046)
 <br></br>
 
-### 1. center_pivot_extract
-- When selecting and executing the `transform` node, the Pivot and Pivot Rotate values for X, Y, and Z are set to `$CEX`, `$CEY`, `$CEZ`, respectively.
-<br></br>
-
-### 2. fx_pipeline
-<img src="https://github.com/user-attachments/assets/c3fbc30c-9fc1-4792-b0d3-de2893c4e3ef" width="50%" height="auto">
-
-- When you set the `Project Name` and `Houdini File Format`, a directory with the specified Project Name is created in the Save Folder.
-- It follows the folder tree structure as shown below.
-- The parent directory of the saved project is loaded as a preset the next time the tool is executed.
-<br></br>
-<img src="https://github.com/user-attachments/assets/e8b3d1c4-d08e-4f10-807f-83f5f88db38f" width="25%" height="auto">
-<br></br>
-
-### 3. import_repath
-<img src="https://github.com/user-attachments/assets/2ce47c41-5985-4eca-85ef-e1f27ab3825f" width="40%" height="auto">
-
-- You can rename the file paths of `File`, `Alembic`, and `USD Import` nodes when importing files.
-- Renaming follows a sequential process.
-    - Example: `foo → test`, `test → poo` Final name: `poo`.
-<br></br>
-
-### 4. keep_working_file
-- Before using this tool, you must first create a project through `fx_pipeline` and then open the hip file.
-- The currently opened hip file is copied to the `keep` folder, and a new version of the hip file is created.
-<br></br>
-
-### 5. memory_clear
+### psj_fx_tool
+#### 1. memory_clear
 - It is recommended to use this tool before `caching` or `rendering`.
 - It helps clear background memory while working with hip files.
 <br></br>
 
-### 6. multi_rendering
+#### 2. center_pivot_extract
+- When selecting and executing the `transform` node, the Pivot and Pivot Rotate values for X, Y, and Z are set to `$CEX`, `$CEY`, `$CEZ`, respectively.
+<br></br>
+
+#### 3. attrib_spliter
+<img src="https://github.com/user-attachments/assets/3ac79e29-5388-4307-a7ba-e31ba63efce7" width="40%" height="auto">
+
+- When specifying `Point` and `Prim` attributes, the tool divides the area into clusters based on the given attribute.
+- If rendering is required, it automatically creates separate `Mantra` or `Karma` nodes for each clustered area. (add lights and viewport based camera)
+- The cluster-related attribute must be an `int` value.
+<br></br>
+
+#### 4. multi_rendering
 <img src="https://github.com/user-attachments/assets/f1e9d7e6-5c38-487e-99a7-75b18f577c8e" width="30%" height="auto">
 <img src="https://github.com/user-attachments/assets/dad5480b-2147-42c9-96d7-66ac0e0615a0" width="30%" height="auto">
 <img src="https://github.com/user-attachments/assets/6ce75f3a-ea47-45f6-8f72-b4cb8d87049e" width="30%" height="auto">
@@ -110,13 +96,32 @@ Use the Up/Down buttons to adjust the render order.
 - After rendering, a preset is saved in the current hip file, so the next time you open it, the render nodes will automatically be loaded in the correct order.
 <br></br>
 
-### 7. point_spliter, prim_spliter
-- When specifying `Point` and `Prim` attributes, the tool divides the area into clusters based on the given attribute.
-- If rendering is required, it automatically creates separate `Mantra` nodes for each clustered area.
-- The cluster-related attribute must be an `int` value.
+#### 5. import_repath
+<img src="https://github.com/user-attachments/assets/2ce47c41-5985-4eca-85ef-e1f27ab3825f" width="40%" height="auto">
+
+- You can rename the file paths of `File`, `Alembic`, and `USD Import` nodes when importing files.
+- Renaming follows a sequential process.
+    - Example: `foo → test`, `test → poo` Final name: `poo`.
+<br></br>
 <br></br>
 
-### 8. render_naming
+### psj_pipeline
+#### 1. fx_pipeline
+<img src="https://github.com/user-attachments/assets/c3fbc30c-9fc1-4792-b0d3-de2893c4e3ef" width="50%" height="auto">
+
+- When you set the `Project Name` and `Houdini File Format`, a directory with the specified Project Name is created in the Save Folder.
+- It follows the folder tree structure as shown below.
+- The parent directory of the saved project is loaded as a preset the next time the tool is executed.
+<br></br>
+<img src="https://github.com/user-attachments/assets/e8b3d1c4-d08e-4f10-807f-83f5f88db38f" width="25%" height="auto">
+<br></br>
+
+#### 2. keep_working_file
+- Before using this tool, you must first create a project through `fx_pipeline` and then open the hip file.
+- The currently opened hip file is copied to the `keep` folder, and a new version of the hip file is created.
+<br></br>
+
+#### 3. render_naming
 <img src="https://github.com/user-attachments/assets/baec1a80-7b72-475c-834a-35b59641f2c1" width="50%" height="auto">
 
 - You can create a project using psj_fx_pipeline and use it afterward.

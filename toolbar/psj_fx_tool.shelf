@@ -8,10 +8,9 @@
   <toolshelf name="psj_fx_tools" label="psj_fx_tools">
     <memberTool name="memory_clear"/>
     <memberTool name="center_pivot_extract"/>
-    <memberTool name="prim_spliter"/>
-    <memberTool name="point_spliter"/>
-    <memberTool name="import_repather"/>
+    <memberTool name="attrib_spliter"/>
     <memberTool name="multi_rendering"/>
+    <memberTool name="import_repather"/>
   </toolshelf>
 
   <tool name="center_pivot_extract" label="Center Pivot Extract" icon="PLASMA_App">
@@ -159,5 +158,32 @@ win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
 win.ui.show()
 
 ]]></script>
+  </tool>
+
+  <tool name="attrib_spliter" label="Attrib Spliter" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir, 
+                'script', 
+                'attrib_spliter').replace('\\', '/') )
+
+import attrib_spliter
+reload( attrib_spliter )
+
+if hou.selectedNodes():
+    win = attrib_spliter.AttribSpliter( hou.selectedNodes() )
+    if win.valid:
+        win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
+        win.ui.show()
+
+else:
+    hou.ui.displayMessage( 'Select the node plz', 
+                        severity=hou.severityType.Error )]]></script>
   </tool>
 </shelfDocument>
