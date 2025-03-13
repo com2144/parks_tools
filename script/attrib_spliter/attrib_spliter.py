@@ -157,6 +157,21 @@ class AttribSpliter:
                     sop_import.moveToGoodPosition()
 
                     dome_light = hou.node( '/stage' ).createNode( 'domelight::3.0', f'domelight_{i}' )
+                    if i > 0:
+                        intens_expr = f'ch("../domelight_0/xn__inputsintensity_i0a")'
+                        dome_light.parm( 'xn__inputsintensity_i0a' ).setExpression( intens_expr, language=hou.exprLanguage.Hscript )
+
+                        expos_expr = f'ch("../domelight_0/xn__inputsexposure_vya")'
+                        dome_light.parm( 'xn__inputsexposure_vya' ).setExpression( expos_expr, language=hou.exprLanguage.Hscript )
+
+                        first_dome_light = hou.node( '/stage/domelight_0' )
+                        source_light_parm_tuple = first_dome_light.parmTuple( 'xn__inputscolor_zta' )
+                        target_light_parm_tuple = dome_light.parmTuple( 'xn__inputscolor_zta' )
+
+                        for src_light_parm, tgt_light_parm in zip( source_light_parm_tuple, target_light_parm_tuple ):
+                            tgt_light_parm.setExpression( f'ch("../domelight_0/{src_light_parm.name()}")', 
+                                                            language=hou.exprLanguage.Hscript )
+
                     dome_light.setFirstInput( sop_import )
                     dome_light.moveToGoodPosition()
 
@@ -177,11 +192,12 @@ class AttribSpliter:
                         first_camera = hou.node( '/stage/camera_0' )
 
                         for param_name in ['t', 'r', 's']:
-                            source_parm_tuple = first_camera.parmTuple(param_name)
-                            target_parm_tuple = camera.parmTuple(param_name)
+                            source_cam_parm_tuple = first_camera.parmTuple(param_name)
+                            target_cam_parm_tuple = camera.parmTuple(param_name)
 
-                            for src_parm, tgt_parm in zip( source_parm_tuple, target_parm_tuple ):
-                                tgt_parm.setExpression( f'ch("../camera_0/{src_parm.name()}")', language=hou.exprLanguage.Hscript )
+                            for src_cam_parm, tgt_cam_parm in zip( source_cam_parm_tuple, target_cam_parm_tuple ):
+                                tgt_cam_parm.setExpression( f'ch("../camera_0/{src_cam_parm.name()}")', 
+                                                            language=hou.exprLanguage.Hscript )
                     
                     camera.setFirstInput( dome_light )
                     camera.moveToGoodPosition()
