@@ -13,7 +13,7 @@ pip install PySide2
 - This tool sets up the environment variables required to use the Parks tool.
 
 ##### How to use   
-<a href="https://www.notion.so/sunjune-study-diary/env_setup-1aa19d11eb3f80318b9bcd837f9eb407" target="_blank">
+<a href="https://sunjune-study-diary.notion.site/env_setup-1aa19d11eb3f80318b9bcd837f9eb407" target="_blank">
     Env Setup Manual
 </a>
 <br></br>
@@ -23,7 +23,7 @@ pip install PySide2
 - To use this tool, `ffmpeg` must be installed in `mp4_converter/tools`.
 
 ##### How to use   
-<a href="https://www.notion.so/sunjune-study-diary/mp4_converter-1aa19d11eb3f80d28e46c62823ff8cc4" target="_blank">
+<a href="https://sunjune-study-diary.notion.site/mp4_converter-1aa19d11eb3f80d28e46c62823ff8cc4" target="_blank">
     Mp4 Converter
 </a>
 <br></br>
@@ -33,7 +33,7 @@ pip install PySide2
 - Supported files formats: `mov`, `mp4`, `dpx`, `exr`, `jpg`, `jpeg`, `png`, `tiff`.
 
 ##### How to use   
-<a href="https://www.notion.so/sunjune-study-diary/multi_copy-1aa19d11eb3f80ac958aede7fe198798" target="_blank">
+<a href="https://sunjune-study-diary.notion.site/multi_copy-1aa19d11eb3f80ac958aede7fe198798" target="_blank">
     Multi Copy
 </a>
 <br></br>
