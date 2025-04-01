@@ -286,16 +286,20 @@ class Convert:
             return
 
         success_list = []
-        fail_iist = []
+        fail_list = []
         for idx, data in enumerate(self.model.data_tbl_list):
             if data[0]:
                 cmd, output_path = self.ffmpeg_cmd( options[idx], subs[idx], file_path_list[idx], data )
-                result = subprocess.run( cmd, capture_output=True, text=True )
 
-                if result.stderr:
+                if not os.path.exists( cmd[0] ):
+                    return self.ui.message_box( 'error', 'ffmpeg Error', f'ffmpeg file is not exists.\n{cmd[0]}')
+
+                result = subprocess.run( cmd, capture_output=True, text=True, encoding='utf-8' )
+
+                if result.returncode == 0:
                     success_list.append( f'[{idx}] - {output_path}' )
                 else:
-                    fail_iist.append( f'[{idx}] - {output_path}' )
+                    fail_list.append( f'[{idx}] - {output_path}' )
         
         msg = ''
         if success_list:
@@ -304,11 +308,11 @@ class Convert:
             msg += ('='*10) + '\n'
             msg += '\n'.join( success_list ) + '\n'
 
-        elif fail_iist:
+        elif fail_list:
             msg += ('='*10) + '\n'
             msg += 'Fail list' + '\n'
             msg += ('='*10) + '\n'
-            msg += '\n'.join( fail_iist ) + '\n'
+            msg += '\n'.join( fail_list ) + '\n'
 
         if self.log:
             self.log.set_log( msg )
@@ -393,7 +397,7 @@ class Convert:
 
 
     def ffmpeg_executable( self ):
-        now_path = os.path.dirname( os.path.abspath(__file__) )
+        now_path = os.path.dirname( sys.executable )
         tool_path = os.path.join( now_path, 'tools' )
 
         if platform.system() == 'Windows':

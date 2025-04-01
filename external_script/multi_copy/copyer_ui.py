@@ -7,7 +7,7 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 
 
-ICON = os.path.join( os.path.dirname( os.path.abspath( __file__ ) ), 'icon' )
+ICON = os.path.join( os.path.dirname( os.path.abspath( sys.executable ) ), 'icon' )
 
 
 DEV = 0
@@ -314,9 +314,9 @@ class RemoveBtnWidget( QWidget ):
         super().__init__( parent )
         self.row = row
 
-        rm_btn = QPushButton( '−' )
-        # rm_btn.setIcon( QIcon( os.path.join( ICON, 'minus.png' ) ) )
-        # rm_btn.setFlat( True )
+        rm_btn = QPushButton()
+        rm_btn.setIcon( QIcon( os.path.join( ICON, 'minus.png' ) ) )
+        rm_btn.setFlat( True )
         rm_btn.setMinimumSize( QSize( 50, 30 ) )
         rm_btn.setMaximumSize( QSize( 50, 30 ) )
 
