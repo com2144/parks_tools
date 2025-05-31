@@ -1,5 +1,7 @@
 import os
 import re
+import glob
+import json
 import platform
 import sys
 
@@ -29,10 +31,13 @@ class EnvSetup:
 
         if system == 'Windows':
             hou_dir = os.path.join(home_dir, 'Documents')
+            self.model.hou_install_dir = os.path.join(os.environ['ProgramFiles'], 'Side Effects Software')
         elif system == 'Darwin':
             hou_dir = os.path.join(home_dir, 'Library', 'Perferences', 'houdini')
+            self.model.hou_install_dir = os.path.join('', 'Applications')
         else:
             hou_dir = home_dir
+            self.model.hou_install_dir = '/opt'
 
         for item in os.listdir( hou_dir ):
             child_path = os.path.join( hou_dir, item )
@@ -51,9 +56,7 @@ class EnvSetup:
 
 
     def _set_env_data(self):
-        parks_tool_dir = NOW_PATH
-        for i in range(2):
-            parks_tool_dir = os.path.dirname( parks_tool_dir )
+        parks_tool_dir = os.path.abspath(os.path.join(NOW_PATH, '..', '..'))
         
         parks_tool_dir = parks_tool_dir.replace('\\', '/')
 
@@ -64,6 +67,12 @@ class EnvSetup:
 
         houdini_version = str(self.ui.env_cb.currentText())
         env_file = self.model.version_env_dict[ houdini_version ]
+
+        hou_dir_json = self.hou_env_write(houdini_version)
+
+        if not os.path.exists(hou_dir_json):
+            self.ui.message_box('error', 'Json File Save Error', f'Houdini Dir Info Not Exists.\n{hou_dir_json}')
+            return
         
         env_data = open( env_file, 'r' )
         env_data = env_data.read()
@@ -96,13 +105,35 @@ class EnvSetup:
             self.ui.message_box( 'warning', 'Env already Exists', 'env-set already Exist.' )
 
 
-    def _set_reset_env( self ):
-        parks_tool_dir = NOW_PATH
-        for i in range(2):
-            parks_tool_dir = os.path.dirname( parks_tool_dir )
-
-        houdini_version = str(self.ui.env_cb.currentText())
+    def hou_env_write(self, hou_ver):
+        if platform.system() != 'Linux': 
+            choose_ver_install_dir = os.path.join(self.model.hou_install_dir, f'Houdini {hou_ver}.*')
+        else:
+            choose_ver_install_dir = os.path.join(self.model.hou_install_dir, f'hfs{hou_ver}.*')
         
+        print(choose_ver_install_dir)
+        match_dirs = glob.glob(choose_ver_install_dir)
+        match_dirs = sorted(
+            match_dirs,
+            key=lambda minor_ver: int(re.search(r'\d+\.\d+\.(\d+)', minor_ver).group(1))
+        )
+        print(match_dirs)
+        hou_dir = match_dirs[-1]
+
+        hou_dir_data = {}
+        hou_dir_data['hou_dir'] = hou_dir
+        
+        parks_tool_dir = os.path.abspath(os.path.join(NOW_PATH, '..', '..'))
+        json_file = os.path.join(parks_tool_dir, 'hou_env_dir.json')
+
+        with open(json_file, 'w')as file:
+            json.dump(hou_dir_data, file)
+
+        return json_file
+
+
+    def _set_reset_env( self ):
+        houdini_version = str(self.ui.env_cb.currentText())
 
         reset_sig = self.ui.message_box( 'warning', 'Reset Warning', 
                             f'You really reset the "{houdini_version}" version env file?', confirm=True )
