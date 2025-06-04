@@ -165,7 +165,7 @@ class PipelineSetup:
     def init_houdini_set( self, dir_path, ext ):
         houdini_file_name = os.path.join( dir_path, f'{self.model.project_name}_shot_work_fx_v001.{ext}' )
         if not os.path.exists( houdini_file_name ):
-            hou.hipFile.save( houdini_file_name, save_to_recent_files=False )
+            hou.hipFile.save( houdini_file_name )
             hou.hipFile.load( houdini_file_name )
             playbar = hou.playbar
             first_frame = 1001

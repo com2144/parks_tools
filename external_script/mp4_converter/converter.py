@@ -86,7 +86,6 @@ class Convert:
 
             self.ui.message_box( 'error', 'Duplicate Error', msg )
             return
-        
 
         for item in items:
             if os.path.isdir( item ):

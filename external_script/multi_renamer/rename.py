@@ -220,6 +220,7 @@ class Rename:
         row_count = rn_tbl.rowCount()
 
         if row_count > 0:
+            rn_tbl.clearContents()
             rn_tbl.setRowCount(0)
             self.model.rn_list = []
 
