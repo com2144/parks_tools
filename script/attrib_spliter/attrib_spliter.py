@@ -158,10 +158,10 @@ class AttribSpliter:
 
                     dome_light = hou.node( '/stage' ).createNode( 'domelight::3.0', f'domelight_{i}' )
                     if i > 0:
-                        intens_expr = f'ch("../domelight_0/xn__inputsintensity_i0a")'
+                        intens_expr = 'ch("../domelight_0/xn__inputsintensity_i0a")'
                         dome_light.parm( 'xn__inputsintensity_i0a' ).setExpression( intens_expr, language=hou.exprLanguage.Hscript )
 
-                        expos_expr = f'ch("../domelight_0/xn__inputsexposure_vya")'
+                        expos_expr = 'ch("../domelight_0/xn__inputsexposure_vya")'
                         dome_light.parm( 'xn__inputsexposure_vya' ).setExpression( expos_expr, language=hou.exprLanguage.Hscript )
 
                         first_dome_light = hou.node( '/stage/domelight_0' )

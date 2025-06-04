@@ -32,52 +32,6 @@ reload(center_pivot_extract)
 center_pivot_extract.load()]]></script>
   </tool>
 
-  <tool name="prim_spliter" label="Prim Spliter" icon="PLASMA_App">
-    <script scriptType="python"><![CDATA[import os
-import sys
-from imp import reload
-
-import hou
-
-psj_dir = hou.hscriptExpression('$PSJ_SITE')
-
-sys.path.append( os.path.join(psj_dir, 
-                'script', 
-                'prim_spliter').replace('\\', '/') )
-
-import prim_spliter
-reload(prim_spliter)
-
-prim_input = hou.ui.readInput( 'enter the prim attrib', 
-                                buttons=("OK", "Cancel"), title='prim Spliter' )
-
-if prim_input[0] == 0:
-    prim_spliter.load( prim_input[1] )]]></script>
-  </tool>
-
-  <tool name="point_spliter" label="Point Spliter" icon="PLASMA_App">
-    <script scriptType="python"><![CDATA[import os
-import sys
-from imp import reload
-
-import hou
-
-psj_dir = hou.hscriptExpression('$PSJ_SITE')
-
-sys.path.append( os.path.join(psj_dir, 
-                'script', 
-                'point_spliter').replace('\\', '/') )
-
-import point_spliter
-reload(point_spliter)
-
-point_input = hou.ui.readInput( 'enter the point attrib', 
-                                buttons=("OK", "Cancel"), title='point Spliter' )
-
-if point_input[0] == 0:
-    point_spliter.load( point_input[1] )]]></script>
-  </tool>
-
   <tool name="memory_clear" label="Memory Clear" icon="PLASMA_App">
     <script scriptType="python"><![CDATA[import os
 import sys

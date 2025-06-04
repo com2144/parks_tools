@@ -273,8 +273,7 @@ class MultiRendering:
                 elif render_node.type().name() == 'usdrender_rop':
                     out_path = render_node.inputs()[0].parm( 'picture' ).eval()
                 
-                if not out_path:
-                    path_confirm = True
+                path_confirm = True if not out_path else False
                 
                 if not path_confirm:
                     render_node.parm( 'execute' ).pressButton()
