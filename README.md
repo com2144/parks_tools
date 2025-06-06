@@ -103,6 +103,20 @@ Use the Up/Down buttons to adjust the render order.
 - Renaming follows a sequential process.
     - Example: `foo → test`, `test → poo` Final name: `poo`.
 <br></br>
+
+#### 6. bg_rendering
+<img src="https://github.com/user-attachments/assets/8ec7eb38-e9b1-49f5-8097-7f160f972f13" width="40%" height="auto">
+<img src="https://github.com/user-attachments/assets/10deb84b-26b3-4d6a-9492-0668b3fbf261" width="55%" height="auto">
+
+- Before using this tool, You have to run `env_setup` first.
+    - Please refer to the manual above for more details on `env_setup`.
+- On `Windows`, run the `.bat` and `macOS` or `Linux`, run the `.sh`.
+- Click the `Browse` button to load a `.hip` file.
+- You can freely set the `save path`, `start frame`, and `end frame` of the render nodes within the `.hip` file.
+    - You can selectively render based on the checkBoxes.
+- Click Rendering to start the render process.
+    - During rendering, you can check the render status via the terminal.
+<br></br>
 <br></br>
 
 ### psj_pipeline
