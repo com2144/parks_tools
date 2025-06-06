@@ -253,8 +253,7 @@ class BGrender:
                     print('#'*115)
                     print('\n')
 
-            if os.path.exists(self.model.tmp_file):
-                os.remove(self.model.tmp_file)
+            self.rm_job(self.model.hip_file, render_script)
 
             print('\n')
             print('*'*115)
@@ -271,6 +270,14 @@ class BGrender:
             error_msg = '\n'.join(error_list)
 
             self.ui.message_box('error', 'Rendering Error', error_msg)
+
+
+    def rm_job(self, hip, render_script):
+        if os.path.exists(hip):
+            os.remove(hip)
+        
+        if os.path.exists(render_script):
+            os.remove(render_script)
 
 
     def print_progress_bar(self, iteration, total, length=90):
