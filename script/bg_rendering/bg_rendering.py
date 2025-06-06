@@ -40,6 +40,7 @@ class BGrender:
             
             self.ui.table_wg.clear()
             self._set_hou_info_tbl()
+            self.chk_sig()
         
         else:
             self.ui.message_box('error', 'Hip File Empty', 'Select the Hip File !')
@@ -115,6 +116,21 @@ class BGrender:
                     tmp_list.append(end_edt_item.line_edt)
 
             self.model.wg_list.append(tmp_list)
+
+
+    def chk_sig(self):
+        render_tbl = self.ui.table_wg
+        row_count = render_tbl.rowCount()
+
+        for row in range(row_count):
+            chk = self.model.wg_list[row][0]
+            chk.toggled.connect(lambda state, r=row: self.on_chkbox_toggled(state, r))
+
+
+    def on_chkbox_toggled(self, state, row):
+        for col in range(1, 5):
+            widget = self.model.wg_list[row][col]
+            widget.setEnabled(state)
 
 
     def confirm_render_info(self):
