@@ -253,7 +253,7 @@ class BGrender:
                     print('#'*115)
                     print('\n')
 
-            self.rm_job(self.model.hip_file, render_script)
+            self.rm_job(self.model.tmp_file, render_script)
 
             print('\n')
             print('*'*115)
