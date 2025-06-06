@@ -5,8 +5,10 @@ import traceback
 import time
 import subprocess
 
+
 import hou
 import psutil
+
 
 from bg_rendering_model import *
 import bg_rendering_ui
@@ -38,9 +40,7 @@ class BGrender:
             self.model.hip_file = str(file_path[0])
             self.ui.browse_edt.setText(self.model.hip_file)
             
-            self.ui.table_wg.clear()
             self._set_hou_info_tbl()
-            self.chk_sig()
         
         else:
             self.ui.message_box('error', 'Hip File Empty', 'Select the Hip File !')
@@ -74,6 +74,10 @@ class BGrender:
                     chkbox_item.chk_box.setCheckable(True)
                     chkbox_item.chk_box.setChecked(True)
                     render_tbl.setCellWidget(row_idx, col_idx, chkbox_item)
+
+                    chkbox_item.chk_box.toggled.connect(
+                        lambda state, r=row_idx: self.on_chkbox_toggled(state, r)
+                    )
 
                     tmp_list.append(chkbox_item.chk_box)
                 
@@ -118,15 +122,6 @@ class BGrender:
             self.model.wg_list.append(tmp_list)
 
 
-    def chk_sig(self):
-        render_tbl = self.ui.table_wg
-        row_count = render_tbl.rowCount()
-
-        for row in range(row_count):
-            chk = self.model.wg_list[row][0]
-            chk.toggled.connect(lambda state, r=row: self.on_chkbox_toggled(state, r))
-
-
     def on_chkbox_toggled(self, state, row):
         for col in range(1, 5):
             widget = self.model.wg_list[row][col]
@@ -151,7 +146,8 @@ class BGrender:
                     if ext.lower() not in ['.jpg', '.jpeg', '.png', '.exr']:
                         error_list.append(f'[{idx}] "{node_name}" is not "{ext}" supported.')
                     else:
-                        rop_node.parm('picture').set(export_path)
+                        parent_node = rop_node.input(0)
+                        parent_node.parm('picture').set(export_path)
                         difference = True
 
                 if start_frame != self.model.start_frame_list[idx] or end_frame != self.model.end_frame_list[idx]:
