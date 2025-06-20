@@ -33,7 +33,8 @@ class Rename:
 
         if self.model.save_path:
             file_list = [ file for file in os.listdir(self.model.save_path)
-                            if os.path.splitext(file)[-1].lower() in self.model.filter_ext ]
+                            if os.path.splitext(file)[-1].lower() in self.model.filter_ext
+                            or '.' + '.'.join(file.split('.')[-2:]) in self.model.filter_ext ]
         else:
             self.ui.message_box( 'error', 'Empty save path', 'Select the save path.')
             return
@@ -100,7 +101,8 @@ class Rename:
     def rename_run( self ):
         origin_path_list = [ os.path.join(self.model.save_path, file).replace('/', '\\') 
                             for file in os.listdir(self.model.save_path)
-                            if os.path.splitext(file)[-1].lower() in self.model.filter_ext ]
+                            if os.path.splitext(file)[-1].lower() in self.model.filter_ext
+                            or '.' + '.'.join(file.split('.')[-2:]) in self.model.filter_ext]
 
         target_path_list = self.rename_info( origin_path_list, self.model.rn_list )
 
@@ -114,7 +116,7 @@ class Rename:
             for origin_path, target_path in zip(origin_path_list, target_path_list):
                 origin_path_dir = os.path.dirname( origin_path )
                 target_path_dir = os.path.dirname( target_path )
-         
+        
                 if origin_path_dir != target_path_dir:
                     if not os.path.exists( target_path_dir ):
                         os.makedirs( target_path_dir, 0o755 )
@@ -179,7 +181,16 @@ class Rename:
             for idx, origin_path in enumerate( updated_list ):
                 parent_dir = os.path.dirname( os.path.dirname(origin_path) )
                 parent_dir_name = origin_path.split( os.sep )[-2]
-                origin_file_name, ext = os.path.splitext( os.path.basename(origin_path) )
+                
+                file_name = os.path.basename(origin_path)
+                file_name_parts = file_name.split('.')
+
+                if file_name_parts[-1] == 'sc':
+                    origin_file_name = '.'.join(file_name_parts[:-2])
+                    ext = '.' + '.'.join(file_name_parts[-2:])
+
+                else:
+                    origin_file_name, ext = os.path.splitext( file_name )
 
                 if not source_txt and not target_txt:
                     error_list.append( f'[{idx}] source and target input the letter.')
