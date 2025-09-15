@@ -9,6 +9,7 @@
     <memberTool name="fx_pipeline"/>
     <memberTool name="keep_work_file"/>
     <memberTool name="render_naming"/>
+    <memberTool name="archived_rename_hip"/>
   </toolshelf>
 
   <tool name="fx_pipeline" label="FX Pipeline" icon="PLASMA_App">
@@ -76,5 +77,26 @@ if hou.selectedNodes():
 else:
     hou.ui.displayMessage( 'Select the node plz', 
                         severity=hou.severityType.Error )]]></script>
+  </tool>
+
+  <tool name="archived_rename_hip" label="Archived Rename Hip" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import os
+import sys
+from imp import reload
+import hou
+from PySide2 import QtCore
+
+psj_dir = hou.hscriptExpression('$PSJ_SITE')
+
+sys.path.append( os.path.join(psj_dir, 
+                'script', 
+                'archived_rn_hip').replace('\\', '/') )
+
+import archived_rn_hip
+reload(archived_rn_hip)
+
+win = archived_rn_hip.ArchivedHip()
+win.ui.setParent(hou.ui.mainQtWindow(), QtCore.Qt.Window)
+win.ui.show()]]></script>
   </tool>
 </shelfDocument>

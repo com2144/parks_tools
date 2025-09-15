@@ -4,6 +4,10 @@
 __pycache__
 backup
 
+# Pub otls filtering
+otls/*
+!otls/object_reserv_cache_v6.1.1.hda
+
 *.pyc
 *.swp
 *.json
