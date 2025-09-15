@@ -259,7 +259,7 @@ class GeoTreeDialog(QDialog):
         pfg = self.parent.frameGeometry() 
         mfg = self.parent.frameGeometry()
 
-        new_x = max(0, pfg.left() - mfg.width() - 1)
+        new_x = max(0, pfg.left() - mfg.width())
         new_y = pfg.top()
         
         self.move(new_x, new_y)

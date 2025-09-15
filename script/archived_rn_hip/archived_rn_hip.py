@@ -1,5 +1,3 @@
-import hou
-
 import archived_rn_hip_ui
 from archived_rn_hip_model import ArchivedModel
 
