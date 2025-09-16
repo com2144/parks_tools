@@ -136,6 +136,11 @@ class ArchivedHip:
             self.ui.message_box('error', 'None Check', 'Check the Convert Node Path')
             return
 
+        if not any(src_txt in str(path.text()) for _, _, path in self.model.node_list):
+            self.ui.message_box('error', 'Src Not Found',
+                                'The Src Info is not contained in any BasePath.')
+            return
+
         for chk, node, path in self.model.node_list:
             if chk.isChecked():
                 if src_txt in str(path.text()):
