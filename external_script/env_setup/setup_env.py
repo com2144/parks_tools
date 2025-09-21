@@ -64,6 +64,7 @@ class EnvSetup:
 
         parks_otls = parks_tool_site + '/otls'
         parks_tool_bar = parks_tool_site + '/toolbar'
+        parks_packages = parks_tool_site + '/custom_packages'
 
         houdini_version = str(self.ui.env_cb.currentText())
         env_file = self.model.version_env_dict[ houdini_version ]
@@ -90,6 +91,9 @@ class EnvSetup:
 
         content += '\n#PSJ_TOOLBAR\n'
         content += f'HOUDINI_TOOLBAR_PATH = @/toolbar{divide}{parks_tool_bar}\n'
+
+        content += '\n#PSJ_PACKAGES\n'
+        content += f'HOUDINI_PATH = $HOUDINI_PATH{divide}{parks_packages}'
         
         if content not in env_data:
             try:

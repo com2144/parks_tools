@@ -1,0 +1,134 @@
+# Lines starting with # are comments and ignored
+#
+# Each entry starts with no indentation and gives the key used
+# by the menu callback.  By convention, this is nodename/parmname.
+# Multiple keys can be given for the same entry.
+#
+# The next line gives the name of the expression.  Its indentation
+# level is then used for the remainder of the text.  All the
+# code until the next parameter are appended together to make
+# the snippet.  All preceeding indentation is removed.
+# Note that tabs == 8 is assumed.
+
+
+#
+#Point Wrangle
+#
+pointwrangle/snippet
+   Intersection with color
+   float distanceThreshold = 0.06; // The threshold distance between objects
+   vector thisPoint = @P; // The position of the current point
+   int i, j;
+   int pts[] = nearpoints(0, thisPoint, distanceThreshold, 10);
+   for (i = 0; i < len(pts); i++)
+   {
+       int id = point(0, "actorId", pts[i]);
+       for (j = 0; j < len(pts); j++)
+       {
+           if (i != j)
+           {
+               int otherId = point(0, "actorId", pts[j]);
+               if (id != otherId)
+               {
+                   setpointattrib(0, "Cd", pts[i], set(1, 0, 0), "set");
+               }
+           }
+       }
+   }
+
+   @Cd *= @dist;
+
+pointwrangle/snippet
+   removepoint by id/ptnum
+   if(rand(@ptnum*ch("seed"))>ch('threshold')) removepoint(0,@ptnum);
+
+
+pointwrangle/snippet
+   apply orient
+   @N = normalize(@P);
+   @up = {0,1,0};
+   @orient = quaternion(maketransform(@N,@up));
+
+
+pointwrangle/snippet
+   SDF push
+   float volsample = volumesample(1, 0, @P);
+   vector volumegrad = volumegradient(1, 0, @P);
+   vector pushOut = volumegrad * -volsample;
+   @P = @P + pushOut;
+
+
+
+pointwrangle/snippet
+   Remove by NDC
+   vector ndc=toNDC("/obj/cam1",@P);
+   float ov = 0;
+   @Cd = ndc;
+   if(ndc[0]-ov<0 || ndc[0]+ov>1 || ndc[1]-ov<0 || ndc[1]+ov>1 || ndc[2]>0){
+       removepoint(geoself(),@ptnum);
+   }
+
+
+pointwrangle/snippet
+   gather
+   int mypc = pcopen(0, 'P', @P, 1, 100);
+   @P -= (@P-pcfilter(mypc, 'P'))*ch("amplitute");
+
+#
+#Attribute Wrangle SOP
+#
+attribwrangle/snippet
+   Intersection with color
+   float distanceThreshold = 0.06; // The threshold distance between objects
+   vector thisPoint = @P; // The position of the current point
+   int i, j;
+   int pts[] = nearpoints(0, thisPoint, distanceThreshold, 10);
+   for (i = 0; i < len(pts); i++)
+   {
+       int id = point(0, "actorId", pts[i]);
+       for (j = 0; j < len(pts); j++)
+       {
+           if (i != j)
+           {
+               int otherId = point(0, "actorId", pts[j]);
+               if (id != otherId)
+               {
+                   setpointattrib(0, "Cd", pts[i], set(1, 0, 0), "set");
+               }
+           }
+       }
+   }
+
+   @Cd *= @dist;
+
+
+attribwrangle/snippet
+   removepoint by id/ptnum
+   if(rand(@ptnum*ch("seed"))>ch('threshold')) removepoint(0,@ptnum);
+
+
+attribwrangle/snippet
+   SDF push
+   float volsample = volumesample(1, 0, @P);
+   vector volumegrad = volumegradient(1, 0, @P);
+   vector pushOut = volumegrad * -volsample;
+   @P = @P + pushOut;
+
+
+attribwrangle/snippet
+   Remove by NDC
+   vector ndc=toNDC("/obj/cam1",@P);
+   float ov = 0;
+   @Cd = ndc;
+   if(ndc[0]-ov<0 || ndc[0]+ov>1 || ndc[1]-ov<0 || ndc[1]+ov>1 || ndc[2]>0){
+       removepoint(geoself(),@ptnum);
+   }
+
+
+attribwrangle/snippet
+   gather
+   int mypc = pcopen(0, 'P', @P, 1, 100);
+   @P -= (@P-pcfilter(mypc, 'P'))*ch("amplitute");
+
+
+
