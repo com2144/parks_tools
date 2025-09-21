@@ -97,6 +97,7 @@ class ArchivedHip:
 
         select_node_path = str(node.path())
         self.ui.select_edt.setText(select_node_path)
+        self.ui.whole_check.setChecked(True)
 
         self.model.select_geo = str(select_node_path)
         self.model.node_list = tmp_tbl_list
@@ -130,6 +131,10 @@ class ArchivedHip:
         
         if not tr_txt:
             self.ui.message_box('error', 'Tr Empty', 'Write the Target Info')
+            return
+        
+        if src_txt == tr_txt:
+            self.ui.message_box('error', 'Same Rename Info', 'Write the Different Src and Target Info.')
             return
 
         if True not in [chk.isChecked() for chk, _, _ in self.model.node_list]:
