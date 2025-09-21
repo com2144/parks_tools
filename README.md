@@ -63,7 +63,7 @@ pip install PySide2
     - `psj_fx_tool`
         - ![Image](https://github.com/user-attachments/assets/02ea766b-3ca7-4dc3-9636-e29d9e0c0e6f)
     - `psj_pipeline`
-        - ![Image](https://github.com/user-attachments/assets/cf708d7e-961c-4698-bba8-e45047961046)
+        - ![Image](https://github.com/user-attachments/assets/3771252c-e5ac-4b07-b7df-06397c4908d9)
 <br></br>
 
 ### psj_fx_tool
@@ -140,3 +140,12 @@ Use the Up/Down buttons to adjust the render order.
 
 - You can create a project using psj_fx_pipeline and use it afterward.
 - This tool allows you to name render output files and supports version upgrades.
+<br></br>
+
+#### 4. archived_rn_hip
+<img src="https://github.com/user-attachments/assets/bf432b05-7b54-4d8f-8247-881122ac10df" width="85%" height="auto">
+
+- This tool is used when the path of a hip file needs to be updated.
+- Click Select to choose the `Geometry` node that contains the path information.
+- Enter the current information in `Src Info` and the new information in `Target Info`.
+- Click `Convert` to apply the changes.
