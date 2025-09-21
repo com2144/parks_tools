@@ -41,12 +41,12 @@ class ArchivedHip:
         for child in node.children():
             t = child.type()
             if t.category().name() == 'Sop' and\
-                  t.name() in ["filecache::2.0", "alembic", "file", "usdimport"]:
+                  t.name() in ["filecache::2.0", "alembic", "file", "usdimport", "kinefx::fbxcharacterimport"]:
                 wish_nodes.append(child)
         
         if not wish_nodes:
             self.ui.message_box('error', 'Node Empty', 
-                                '["cache", "alembic", "file", "usd"] is not exists')
+                                '["cache", "alembic", "file", "usd", "fbx character Import"] is not exists')
             return
         
         new_rows_count = len(wish_nodes)
@@ -89,6 +89,10 @@ class ArchivedHip:
                     elif select_node.type().name() == "usdimport":
                         usd_path = select_node.parm('filepath1').rawValue()
                         edt_item.line_edt.setText(usd_path)
+                    
+                    elif select_node.type().name() == "kinefx::fbxcharacterimport":
+                        kine_fbx_path = select_node.parm('fbxcharacterimport1').rawValue()
+                        edt_item.line_edt.setText(kine_fbx_path)
 
                     cache_tbl.setCellWidget(row_idx, col_idx, edt_item)
                     wg_list.append(edt_item.line_edt)
@@ -163,6 +167,9 @@ class ArchivedHip:
                     
                     elif node.type().name() == "usdimport":
                         node.parm('filepath1').set(str(path_txt))
+                    
+                    elif node.type().name() == "kinefx::fbxcharacterimport":
+                        node.parm('fbxcharacterimport1').set(str(path_txt))
                     
                     path.setText(path_txt)
         
