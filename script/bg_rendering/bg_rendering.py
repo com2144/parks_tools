@@ -233,7 +233,7 @@ class BGrender:
                         print('@'*115)
                         content = 'import hou\n\n'
 
-                        content += f'hou.hipFile.load("{self.model.tmp_file}")\n'
+                        content += f'hou.hipFile.load(r"{self.model.tmp_file}")\n'
                         content += f'render_node = hou.node("{node_path}")\n'
                         content += 'render_node.parm("verbose").set(1)\n'
                         content += 'render_node.parm("trange").set(1)\n'
@@ -241,7 +241,7 @@ class BGrender:
                         content += 'frame_parm.deleteAllKeyframes()\n'
                         content += f'frame_parm.set(({frame}, {frame}, 1))\n\n'
 
-                        content += f'hou.hipFile.save("{self.model.tmp_file}")\n'
+                        content += f'hou.hipFile.save(r"{self.model.tmp_file}")\n'
                         content += 'render_node.parm("execute").pressButton()\n'
 
                         memory_used = psutil.virtual_memory().percent
