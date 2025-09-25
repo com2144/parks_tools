@@ -214,7 +214,8 @@ class BGrender:
             error_list.extend(copy_tmp)
 
         if not error_list:
-            render_script = os.path.join(os.path.dirname(self.model.tmp_file), 'script', 'rendering_script.py')
+            render_script = os.path.join(os.path.dirname(os.path.dirname(self.model.tmp_file)), 
+                                         'script', 'rendering_script.py')
             if not os.path.exists(os.path.dirname(render_script)):
                 os.makedirs(os.path.dirname(render_script), 0o777)
 
