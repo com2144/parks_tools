@@ -180,8 +180,11 @@ class BGrender:
         error_list = []
 
         try:
-            self.model.tmp_file = os.path.join(os.path.dirname(self.model.hip_file), 
+            self.model.tmp_file = os.path.join(os.path.dirname(self.model.hip_file), 'tmp',
                                             '.' + os.path.basename(self.model.hip_file))
+            
+            if not os.path.exists(os.path.dirname(self.model.tmp_file)):
+                os.makedirs(os.path.dirname(self.model.tmp_file), 0o777)
 
             if os.path.exists(self.model.tmp_file):
                 os.remove(self.model.tmp_file)
