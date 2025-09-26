@@ -12,6 +12,8 @@ import converter_ui
 from converter_model    import ConvertModel
 from constant           import *
 
+DEV = 0
+
 class Convert:
     def __init__( self ):
         self.ui = converter_ui.ConvertUi()
@@ -19,9 +21,7 @@ class Convert:
 
         self.rename = Rename( self.model, converter_ui, self.ui )
 
-
         self.log = None
-
 
         self.ui.save_dir_btn.clicked.connect( self._set_save_dir )
 
@@ -363,7 +363,8 @@ class Convert:
 
         cmd += [ '-r', str(fps) ]
 
-        file_name = os.path.splitext(os.path.basename( file_path ))[0]
+        file_name = os.path.basename( file_path )
+
         m = re.fullmatch(r'^(?P<base>[\w\-]+)\.(?P<ver>v\d{3})(?:\.(?P<frame>\d+))?$', file_name)
 
         if m:
@@ -393,7 +394,10 @@ class Convert:
 
 
     def ffmpeg_executable( self ):
-        now_path = os.path.dirname( sys.executable )
+        if DEV:
+            now_path = os.path.dirname( os.path.abspath(__file__) )
+        else:
+            now_path = os.path.dirname( sys.executable )
         tool_path = os.path.join( now_path, 'tools' )
 
         if platform.system() == 'Windows':
