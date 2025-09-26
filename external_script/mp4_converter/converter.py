@@ -363,7 +363,7 @@ class Convert:
 
         file_name = os.path.basename( file_path )
 
-        pattern = r'^([\w\-]+_v\d{3})$'
+        pattern = r'^([\w\-]+)\.(v\d{3})$'
         match = re.match( pattern, file_name )
         
         file_name_split = file_name.split('_')
