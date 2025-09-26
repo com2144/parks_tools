@@ -55,7 +55,7 @@ class Convert:
     def dtl_get_content( self, items ):
         warning_msg = []
 
-        pattern = r'^([\w\-]+_v\d{3})\.(\d+)$'
+        pattern = r'^([\w\-]+)\.(v\d{3})\.(\d+)$'
         items_name = []
         for item in items:
             base_name = os.path.basename( item )
@@ -95,7 +95,7 @@ class Convert:
                 file = os.path.basename( item )
                 ext = os.path.splitext( file )[-1]
                 
-                pattern = r'^([\w\-]+_v\d{3})\.(\d+)\.(\w+)$'
+                pattern = r'^([\w\-]+)\.(v\d{3})\.(\d+)\.(\w+)$'
                 match = re.match( pattern, file )
 
                 if ext.lower() not in FORMAT:
