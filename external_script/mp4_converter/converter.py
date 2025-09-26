@@ -62,6 +62,7 @@ class Convert:
             file_name = os.path.splitext( base_name )[0]
             if re.match( pattern, file_name ):
                 file_name = file_name.split( '.' )[:-1]
+                file_name = '.'.join(file_name)
             
             items_name.append( file_name )
         
@@ -71,6 +72,7 @@ class Convert:
             file_name = os.path.splitext( base_name )[0]
             if re.match( pattern, file_name ):
                 file_name = file_name.split( '.' )[:-1]
+                file_name = '.'.join(file_name)
             
             datas_name.append( file_name )
 
@@ -361,32 +363,27 @@ class Convert:
 
         cmd += [ '-r', str(fps) ]
 
-        file_name = os.path.basename( file_path )
+        file_name = os.path.splitext(os.path.basename( file_path ))[0]
+        m = re.fullmatch(r'^(?P<base>[\w\-]+)\.(?P<ver>v\d{3})(?:\.(?P<frame>\d+))?$', file_name)
 
-        pattern = r'^([\w\-]+)\.(v\d{3})$'
-        match = re.match( pattern, file_name )
-        
-        file_name_split = file_name.split('_')
-
-        if match:
-            ver = file_name_split[-1]
-            base_name = '_'.join( file_name_split[:-1] ) if len(file_name_split) > 1 else file_name 
-
+        if m:
+            base_name = m.group('base')
+            ver = m.group('ver')
         else:
-            ver = None
             base_name = file_name
+            ver = None
         
         if version:
             ver = f'v{version.zfill(3)}'
         
         if memo:
             if ver:
-                file_name = f'{base_name}_{memo}_{ver}'
+                file_name = f'{base_name}_{memo}.{ver}'
             else:
                 file_name = f'{base_name}_{memo}'
 
         elif ver:
-            file_name = f'{base_name}_{ver}'
+            file_name = f'{base_name}.{ver}'
 
         output_path = os.path.join( self.model.save_dir_path.replace('/', '\\'), f'{file_name}.mp4')
 
