@@ -131,7 +131,7 @@ class RenderNaming:
                         
                         _, ext = os.path.splitext( os.path.basename(parent_node.parm( 'picture' ).rawValue()) )
                         ext = ext[1:]
-                        review_path = os.path.dirname(hou.hscriptExpression('$HIP')) + '/reveiw'
+                        review_path = os.path.dirname(hou.hscriptExpression('$HIP')) + '/review'
 
                         parent_node.parm( 'picture' ).set(f'{review_path}/{ext}/$OS/v`padzero(3,chs("../adjust_version/version"))`'
                                                           f'/$OS.v`padzero(3,chs("../adjust_version/version"))`.$F4.{ext}')
@@ -144,7 +144,7 @@ class RenderNaming:
                         render_node.setName( str(info.text()))
                         _, ext = os.path.splitext( os.path.basename(render_node.parm( 'vm_picture' ).rawValue()) )
                         ext = ext[1:]
-                        review_path = os.path.dirname(hou.hscriptExpression('$HIP')) + '/reveiw'
+                        review_path = os.path.dirname(hou.hscriptExpression('$HIP')) + '/review'
 
                         render_node.parm( 'vm_picture' ).set(f'{review_path}/{ext}/$OS/v`padzero(3,chs("../adjust_version/version"))`'
                                                              f'/$OS.v`padzero(3,chs("../adjust_version/version"))`.$F4.{ext}')
