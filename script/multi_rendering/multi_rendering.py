@@ -1,10 +1,15 @@
 import os
 import platform
 import json
+from imp import reload
+
 import hou
 
 import multi_rendering_ui
 from multi_rendering_model import MultiRenderingModel
+
+reload(multi_rendering_ui)
+reload(MultiRenderingModel)
 
 
 NOW_PATH = os.path.dirname( os.path.abspath(__file__) )

@@ -1,10 +1,15 @@
 import os
 import re
+from imp import reload
+
 import hou
 
 
 from render_naming_model import RenderNamingModel
 import render_nameing_ui
+
+reload(RenderNamingModel)
+reload(render_nameing_ui)
 
 
 class RenderNaming:

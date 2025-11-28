@@ -4,14 +4,18 @@ import shutil
 import traceback
 import time
 import subprocess
+from imp import reload
 
 
 import hou
 import psutil
 
 
-from bg_rendering_model import *
+from bg_rendering_model import BGrenderModel
 import bg_rendering_ui
+
+reload(BGrenderModel)
+reload(bg_rendering_ui)
 
 
 HOU_EXEC = sys.executable

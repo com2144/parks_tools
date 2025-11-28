@@ -2,10 +2,14 @@ import hou
 
 import os
 import copy
+from imp import reload
 
 
 import  import_repath_ui
 from    import_repath_model     import ImportRepathModel
+
+reload(import_repath_ui)
+reload(ImportRepathModel)
 
 
 class ImportRepath:

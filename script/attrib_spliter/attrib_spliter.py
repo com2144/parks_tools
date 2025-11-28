@@ -1,3 +1,5 @@
+from imp import reload
+
 import hou
 import stateutils
 import objecttoolutils
@@ -5,6 +7,9 @@ import objecttoolutils
 
 import attrib_spliter_ui
 from attrib_spliter_model import AttribSpliterModel
+
+reload(attrib_spliter_ui)
+reload(AttribSpliterModel)
 
 
 class AttribSpliter:

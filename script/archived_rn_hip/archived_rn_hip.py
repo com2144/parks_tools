@@ -1,5 +1,10 @@
+from imp import reload
+
 import archived_rn_hip_ui
 from archived_rn_hip_model import ArchivedModel
+
+reload(archived_rn_hip_ui)
+reload(ArchivedModel)
 
 
 class ArchivedHip:
