@@ -68,7 +68,7 @@ sys.path.append( os.path.join(psj_dir,
 import import_repath
 reload( import_repath )
 
-if hou.selectedNodes():
+if hou.selectedNodes() and [node for node in hou.selectedNodes() if node.parent().type().name()=='geo']:
     win = import_repath.ImportRepath( hou.selectedNodes() )
     win.ui.setParent( hou.ui.mainQtWindow(), QtCore.Qt.Window )
     win.ui.show()

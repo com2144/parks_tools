@@ -191,7 +191,8 @@ class NodeTreeDialog( QDialog ):
     def eventFilter( self, object, event ):
         if object == self.parent and event.type() == QEvent.Move:
             self.updatePosition()
-        return super(NodeTreeDialog, self).eventFilter(object, event)
+            return False
+        return False
 
 
     def updatePosition( self ):
@@ -204,7 +205,8 @@ class NodeTreeDialog( QDialog ):
         new_y = parent_pos.y()
         
         self.move( new_x, new_y )
-    
+
+
     def closeEvent(self, event):
         if self._parent:
             self._parent.removeEventFilter(self)
