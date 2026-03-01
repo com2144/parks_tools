@@ -11,10 +11,10 @@ import hou
 import psutil
 
 
-from bg_rendering_model import BGrenderModel
+import bg_rendering_model
 import bg_rendering_ui
 
-reload(BGrenderModel)
+reload(bg_rendering_model)
 reload(bg_rendering_ui)
 
 
@@ -23,7 +23,7 @@ HOU_EXEC = sys.executable
 
 class BGrender:
     def __init__(self):
-        self.model = BGrenderModel()
+        self.model = bg_rendering_model.BGrenderModel()
         self.ui = bg_rendering_ui.BGrenderUI()
 
         self.ui.browse_btn.clicked.connect(self._set_hip_file)

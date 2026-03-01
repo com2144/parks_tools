@@ -6,10 +6,10 @@ from imp import reload
 import hou
 
 import multi_rendering_ui
-from multi_rendering_model import MultiRenderingModel
+import multi_rendering_model
 
 reload(multi_rendering_ui)
-reload(MultiRenderingModel)
+reload(multi_rendering_model)
 
 
 NOW_PATH = os.path.dirname( os.path.abspath(__file__) )
@@ -18,7 +18,7 @@ NOW_PATH = os.path.dirname( os.path.abspath(__file__) )
 class MultiRendering:
     def __init__( self, preset_dict=None ):
         self.ui = multi_rendering_ui.MultRenderingUi()
-        self.model = MultiRenderingModel()
+        self.model = multi_rendering_model.MultiRenderingModel()
 
         if preset_dict:
             self._set_preset( preset_dict )

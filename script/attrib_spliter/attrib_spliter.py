@@ -6,16 +6,16 @@ import objecttoolutils
 
 
 import attrib_spliter_ui
-from attrib_spliter_model import AttribSpliterModel
+import attrib_spliter_model
 
 reload(attrib_spliter_ui)
-reload(AttribSpliterModel)
+reload(attrib_spliter_model)
 
 
 class AttribSpliter:
     def __init__( self, node ):
         self.selected_node = node
-        self.model = AttribSpliterModel()
+        self.model = attrib_spliter_model.AttribSpliterModel()
         self.ui = attrib_spliter_ui.AttribSpliterUI()
         
         self.valid = self.valid_check()

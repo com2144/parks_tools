@@ -6,16 +6,16 @@ from imp import reload
 
 
 import  import_repath_ui
-from    import_repath_model     import ImportRepathModel
+import import_repath_model
 
 reload(import_repath_ui)
-reload(ImportRepathModel)
+reload(import_repath_model)
 
 
 class ImportRepath:
     def __init__( self, nodes ):
         self.selected_nodes = nodes
-        self.model = ImportRepathModel()
+        self.model = import_repath_model.ImportRepathModel()
         self.ui = import_repath_ui.ImportRepathUi()
 
         self._set_sel_tbl()

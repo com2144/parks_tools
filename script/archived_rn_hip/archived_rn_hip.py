@@ -1,16 +1,16 @@
 from imp import reload
 
 import archived_rn_hip_ui
-from archived_rn_hip_model import ArchivedModel
+import archived_rn_hip_model
 
 reload(archived_rn_hip_ui)
-reload(ArchivedModel)
+reload(archived_rn_hip_model)
 
 
 class ArchivedHip:
     def __init__(self):
         self.ui = archived_rn_hip_ui.ArchivedUI()
-        self.model = ArchivedModel()
+        self.model = archived_rn_hip_model.ArchivedModel()
 
         self.ui.select_btn_func(lambda: self._select_geo())
         self.ui.whole_chk_func(lambda state: self.whole_check(state))

@@ -5,17 +5,17 @@ from imp import reload
 import hou
 
 
-from render_naming_model import RenderNamingModel
+import render_naming_model
 import render_nameing_ui
 
-reload(RenderNamingModel)
+reload(render_naming_model)
 reload(render_nameing_ui)
 
 
 class RenderNaming:
     def __init__( self, nodes ):
         self.selected_nodes = nodes
-        self.model = RenderNamingModel()
+        self.model = render_naming_model.RenderNamingModel()
         self.ui = render_nameing_ui.RenderNamingUI()
         self.valid = True
 
