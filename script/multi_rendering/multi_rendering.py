@@ -22,6 +22,8 @@ class MultiRendering:
 
         if preset_dict:
             self._set_preset( preset_dict )
+        
+        self.node_tree_dlg = None
 
         self.ui.plus_btn_func( lambda: self.node_tree_open() )
         self.ui.minus_btn_func( lambda: self.remove_select_item() )
@@ -264,6 +266,7 @@ class MultiRendering:
 
     def node_tree_handle_cancel( self ):
         print( 'Node tree close' )
+        self.node_tree_dlg = None
 
 
     def render_action( self ):

@@ -167,17 +167,12 @@ class NodeTreeDialog( QDialog ):
             else:
                 dummy_item = QTreeWidgetItem( [root_path] )
                 self.tree_wg.addTopLevelItem( dummy_item )
-    
-        if parent:
-            self.parent = parent
-            parent.installEventFilter( self )
-            parent_pos = parent.pos()
-            parent_size = parent.size()
 
-            new_x = parent_pos.x() - parent_size.width() - 2
-            new_y = parent_pos.y()
-            
-            self.move( new_x, new_y )
+        self._parent = parent
+
+        if parent:
+            parent.installEventFilter( self )
+            self.updatePosition()
 
         self.select_btn.clicked.connect( self.on_select_clicked )
         self.cancel_btn.clicked.connect( self.on_cancel_clicked )
@@ -200,13 +195,21 @@ class NodeTreeDialog( QDialog ):
 
 
     def updatePosition( self ):
-        parent_pos = self.parent.pos()
-        parent_size = self.parent.size()
+        if not self._parent:
+            return
+        parent_pos = self._parent.pos()
+        parent_size = self._parent.size()
 
         new_x = parent_pos.x() - parent_size.width() - 2
         new_y = parent_pos.y()
         
         self.move( new_x, new_y )
+    
+    def closeEvent(self, event):
+        if self._parent:
+            self._parent.removeEventFilter(self)
+        self.closeSignal.emit()
+        super().closeEvent(event)
 
 
     def on_select_clicked( self ):
