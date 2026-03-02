@@ -168,7 +168,7 @@ class ExportMov:
         cmd.append('prores_ks')
         cmd.append('-profile:v')
         cmd.append('3')
-        cmd.append(self.model.mov_path)
+        cmd.append(self.ui.save_path_edt.text())
 
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
@@ -177,5 +177,4 @@ class ExportMov:
             self.ui.message_box("error", "ffmpeg Error", 'Export to Mov Error')
             return
         else:
-            print(f"stdout\n {result.stdout}")
             self.ui.message_box('info', 'ExportMov Done', 'Export to Mov Done.')
