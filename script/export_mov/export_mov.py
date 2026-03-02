@@ -173,7 +173,9 @@ class ExportMov:
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode != 0:
-            self.ui.message_box("error", "ffmpeg Error", result.stderr)
+            print(f"stderr\n {result.stderr}")
+            self.ui.message_box("error", "ffmpeg Error", 'Export to Mov Error')
             return
         else:
+            print(f"stdout\n {result.stdout}")
             self.ui.message_box('info', 'ExportMov Done', 'Export to Mov Done.')
