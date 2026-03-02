@@ -95,8 +95,6 @@ class ExportMov:
                         jpg_path = os.path.join(os.path.dirname(self.model.jpg_path), file)
                         if os.path.isfile(jpg_path):
                             os.remove(jpg_path)
-                else:
-                    return
 
         cam_x, cam_y = self.model.cam_node.parmTuple('res').eval()
         start_text = self.ui.start_frame.text().strip()
