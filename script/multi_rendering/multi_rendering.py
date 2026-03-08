@@ -75,7 +75,7 @@ class MultiRendering:
         self.node_tree_dlg = multi_rendering_ui.NodeTreeDialog( parent=self.ui )
         self.node_tree_dlg.selectSignal.connect( self.node_tree_handle_select )
         self.node_tree_dlg.closeSignal.connect( self.node_tree_handle_cancel )
-        self.node_tree_dlg.exec_()
+        self.node_tree_dlg.show()
 
 
     def node_tree_handle_select( self, selected_nodes ):

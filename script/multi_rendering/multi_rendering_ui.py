@@ -189,9 +189,12 @@ class NodeTreeDialog( QDialog ):
 
 
     def eventFilter( self, object, event ):
-        if object == self.parent and event.type() == QEvent.Move:
+        if object == self._parent and event.type() == QEvent.Move:
             self.updatePosition()
-            return False
+        
+        if event.type() == QEvent.Close:
+            self.close()
+
         return False
 
 

@@ -39,7 +39,7 @@ class ExportMov:
         self.cam_node_tree_dlg = export_mov_ui.CamNodeTreeDialog(parent=self.ui)
         self.cam_node_tree_dlg.selectSignal.connect(self.cam_node_tree_handle_select)
         self.cam_node_tree_dlg.closeSignal.connect(self.cam_node_tree_handle_close)
-        self.cam_node_tree_dlg.exec_()
+        self.cam_node_tree_dlg.show()
 
 
     def cam_node_tree_handle_select(self, node):
