@@ -58,7 +58,7 @@ class RenderNaming:
                 if node.type().name() != 'usdrender_rop':
                     hou.ui.displayMessage( 'Select the "usdrender_rop" node', 
                         severity=hou.severityType.Error )
-                    return
+                    return None
                 
                 if node.input(0).type().name() not in [ 'karmarenderproperties' ]:
                     hou.ui.displayMessage( 'Link the "karmarendersettings" node', 
