@@ -99,6 +99,7 @@ class ExportMov:
         cam_x, cam_y = self.model.cam_node.parmTuple('res').eval()
         start_text = self.ui.start_frame.text().strip()
         end_text = self.ui.end_frame.text().strip()
+        size = int(self.ui.size_cb.currentText().split('%')[0])
 
         try:
             self.model.start = int(start_text)
@@ -118,6 +119,7 @@ class ExportMov:
         flipbook_options.frameRange((float(self.model.start), float(self.model.end)))
         flipbook_options.useResolution(True)
         flipbook_options.resolution((int(cam_x), int(cam_y)))
+        flipbook_options.outputZoom(size)
 
         sceneviewer.flipbook(
             viewport=viewport,
@@ -171,6 +173,8 @@ class ExportMov:
         cmd.append(self.ui.save_path_edt.text())
 
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+        shutil.rmtree(os.path.dirname(jpg_path))
 
         if result.returncode != 0:
             print(f"stderr\n {result.stderr}")

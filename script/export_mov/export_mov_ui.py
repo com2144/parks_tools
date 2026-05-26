@@ -55,6 +55,8 @@ class ExportMovUI(QDialog):
         range_lb = QLabel('-')
         self.end_frame = QLineEdit()
         self.end_frame.setAlignment(Qt.AlignCenter)
+        self.size_cb = QComboBox()
+        self.size_cb.addItems(['100%','75%','50%', '25%'])
 
         frame_range_lay = QHBoxLayout()
         frame_range_lay.addSpacing(11)
@@ -62,6 +64,7 @@ class ExportMovUI(QDialog):
         frame_range_lay.addWidget(self.start_frame)
         frame_range_lay.addWidget(range_lb)
         frame_range_lay.addWidget(self.end_frame)
+        frame_range_lay.addWidget(self.size_cb)
 
 
         self.ok_btn = QPushButton('OK')
